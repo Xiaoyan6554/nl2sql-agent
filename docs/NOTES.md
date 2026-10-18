@@ -78,3 +78,24 @@
 3. 所有版本共用执行安全边界，评测不增加 LIMIT，演示接口单独限制行数。
 4. 单测覆盖每个节点与重试上限，然后各跑同一批完整题目。
 5. 空结果本身合法，不自动重试；避免为了找到行而改变问题含义。
+
+## Phase 2 验收
+
+完整结果见 results/v1_schema_link.json 与 results/v2_repair.json，数字自动汇总至 docs/RESULTS.md。
+真实样本没有触发 repair；重试分支由故意提供错误 SQL 的节点测试覆盖。
+不能将两个独立运行之间的准确率差异归因于 repair。temperature=0 仍不保证供应商完全确定性。
+
+### 用户需要弄懂的五个问题
+
+1. graph.py 的 State 为什么要带 error 和 repairs？条件边靠它们决定下一步。
+2. schema_link.py 为什么保留主外键？裁掉关联键可能让正确 JOIN 无法生成。
+3. validate.py 为什么使用 EXPLAIN QUERY PLAN？让数据库编译器检查表、列和别名。
+4. repair.py 为什么用完整 schema？让模型有机会找回被 schema linking 裁掉的对象。
+5. 为什么空结果不自动修复？空集可能就是正确答案。
+
+## Phase 3 — 开工计划
+
+1. 用简短 BM25 实现检索，不引入向量数据库或额外依赖。
+2. 仅索引 train_spider，排除全部 dev 数据库，返回三条相似示例。
+3. 测试实际训练与 dev 库无重叠，并记录来源哈希和示例 ID。
+4. 运行完整 v3 评测，与 v2 对比；不预设检索一定提升。
