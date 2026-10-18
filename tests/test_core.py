@@ -82,3 +82,8 @@ def test_sqlite_authorizer_independent_of_ast(database):
             conn.execute('SELECT * FROM sqlite_master')
         with pytest.raises(sqlite3.DatabaseError):
             conn.execute("SELECT load_extension('x')")
+
+
+def test_model_refusal_is_safe_parse_error():
+    with pytest.raises(UnsafeSQL, match='解析失败'):
+        validate_sql("I can't help with that. I'm happy to answer a safe query.")

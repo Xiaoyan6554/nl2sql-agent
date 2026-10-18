@@ -18,8 +18,8 @@ def parse_select(sql: str) -> exp.Expression:
         raise UnsafeSQL('SQL 为空或过长')
     try:
         statements = sqlglot.parse(sql, read='sqlite')
-    except sqlglot.errors.ParseError as exc:
-        raise UnsafeSQL(f'SQL 解析失败：{exc.errors[0].get("description", "syntax")}') from None
+    except (sqlglot.errors.ParseError, sqlglot.errors.TokenError):
+        raise UnsafeSQL("SQL 解析失败：内容不是合法的 SQLite 查询") from None
     if len(statements) != 1 or not isinstance(statements[0], (exp.Select, exp.SetOperation)):
         raise UnsafeSQL('只允许单条 SELECT 查询（可含 UNION/INTERSECT/EXCEPT）')
     tree = statements[0]

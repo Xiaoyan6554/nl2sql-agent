@@ -12,3 +12,4 @@ data/*
 eval/questions.jsonl
 work/
 .DS_Store
+docs/ERROR_CASES.local.md
