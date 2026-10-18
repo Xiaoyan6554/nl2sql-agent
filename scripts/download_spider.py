@@ -1,4 +1,4 @@
-"""从 Spider 官网所链接的 Google Drive 下载；失败时要求人工下载。"""
+"""下载固定版本 Spider 公开数据；记录来源并校验哈希。"""
 
 from __future__ import annotations
 
@@ -16,7 +16,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL_PAGE = "https://yale-lily.github.io/spider"
 FILE_ID = "1403EGqzIDoHMdQF4c9Bkyl7dZLZ5Wt6J"
-DOWNLOAD_URL = f"https://drive.usercontent.google.com/download?id={FILE_ID}&export=download&confirm=t"
+OFFICIAL_URL = f"https://drive.usercontent.google.com/download?id={FILE_ID}&export=download&confirm=t"
+MIRROR_URL = ("https://huggingface.co/datasets/xlangai/spider/resolve/"
+              "eb27f6b14c95967490e458ab29803597d70366ba/data/spider.zip")
+MIRROR_SHA256 = "5ddff97bb1d421282c593e8d30ce0ce107270f4dd4a21d60eba4bf287d5956b1"
 
 
 def validate_dataset(path: Path) -> None:
@@ -62,19 +65,21 @@ def extract_dataset(archive: Path, destination: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", choices=["mirror", "official"], default="mirror")
     parser.add_argument("--archive", type=Path, help="导入手动下载的官方 zip")
     parser.add_argument("--destination", type=Path, default=ROOT / "data/spider")
     args = parser.parse_args()
     (ROOT / "work").mkdir(exist_ok=True)
     archive = args.archive or ROOT / "work/spider_data.zip"
+    download_url = MIRROR_URL if args.source == "mirror" else OFFICIAL_URL
     try:
         if args.destination.exists():
             validate_dataset(args.destination)
             print(f"已有完整数据：{args.destination}")
             return 0
         if args.archive is None:
-            print(f"正在从官网提供的 Google Drive 下载：{OFFICIAL_PAGE}", flush=True)
-            request = urllib.request.Request(DOWNLOAD_URL, headers={"User-Agent": "Mozilla/5.0"})
+            print(f"正在下载：{download_url}", flush=True)
+            request = urllib.request.Request(download_url, headers={"User-Agent": "Mozilla/5.0"})
             with urllib.request.urlopen(request, timeout=60) as response, archive.open("wb") as out:
                 size = 0
                 while chunk := response.read(1024 * 1024):
@@ -86,10 +91,12 @@ def main() -> int:
             raise ValueError("下载内容不是 ZIP，可能需要登录或人工确认")
         with archive.open("rb") as source:
             digest = hashlib.file_digest(source, "sha256").hexdigest()
+        if args.source == "mirror" and digest != MIRROR_SHA256:
+            raise ValueError("固定镜像 SHA-256 不匹配，请核对数据来源")
         extract_dataset(archive, args.destination)
         manifest = {
             "source": OFFICIAL_PAGE,
-            "download_url": DOWNLOAD_URL,
+            "download_url": download_url,
             "downloaded_at": datetime.now(UTC).isoformat(),
             "archive_sha256": digest,
             "license": "CC BY-SA 4.0",
@@ -99,7 +106,7 @@ def main() -> int:
         return 0
     except (OSError, ValueError, zipfile.BadZipFile) as error:
         print(f"下载或校验失败：{error}")
-        print(f"按 AGENTS.md 停止。请从 {OFFICIAL_PAGE} 手动下载 Spider Dataset，")
+        print(f"可从 {OFFICIAL_PAGE} 手动下载 Spider Dataset，")
         print(f"解压到 {args.destination}，或使用 --archive /路径/spider_data.zip 导入。")
         return 1
 
