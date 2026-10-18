@@ -54,3 +54,12 @@ def test_path_and_missing_tokens(tmp_path):
                     'latency_seconds': 1, 'gold_error': None}])
     assert m['total_tokens'] is None
     assert not m['usage_complete']
+
+
+def test_invalid_utf8_preserves_distinction(database):
+    import sqlite3
+    with sqlite3.connect(database) as conn:
+        conn.execute("INSERT INTO people VALUES (4, CAST(x'ff' AS TEXT), 40)")
+        conn.execute("INSERT INTO people VALUES (5, CAST(x'fe' AS TEXT), 50)")
+    result = execute(database, 'SELECT name FROM people WHERE id >= 4 ORDER BY id')
+    assert result['rows'][0] != result['rows'][1]
