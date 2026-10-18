@@ -16,9 +16,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL_PAGE = "https://yale-lily.github.io/spider"
 FILE_ID = "1403EGqzIDoHMdQF4c9Bkyl7dZLZ5Wt6J"
-OFFICIAL_URL = f"https://drive.usercontent.google.com/download?id={FILE_ID}&export=download&confirm=t"
-MIRROR_URL = ("https://huggingface.co/datasets/xlangai/spider/resolve/"
-              "eb27f6b14c95967490e458ab29803597d70366ba/data/spider.zip")
+OFFICIAL_URL = (
+    f"https://drive.usercontent.google.com/download?id={FILE_ID}&export=download&confirm=t"
+)
+MIRROR_URL = (
+    "https://huggingface.co/datasets/xlangai/spider/resolve/"
+    "eb27f6b14c95967490e458ab29803597d70366ba/data/spider.zip"
+)
 MIRROR_SHA256 = "5ddff97bb1d421282c593e8d30ce0ce107270f4dd4a21d60eba4bf287d5956b1"
 
 
