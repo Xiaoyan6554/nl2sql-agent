@@ -137,7 +137,10 @@ def main() -> int:
                  'base_url': settings.base_url, 'max_tokens': settings.max_tokens,
                  'extra_body': settings.extra_body, 'git_commit': commit, 'git_dirty': dirty,
                  'code_sha256': code_fingerprint(), 'seed': manifest['seed'],
-                 'dev_sha256': manifest['source_sha256'], 'question_ids': [q['id'] for q in questions],
+                 'dev_sha256': manifest['source_sha256'],
+                 'train_sha256': hashlib.sha256((settings.spider_dir/'train_spider.json').read_bytes()).hexdigest(),
+                 'uv_lock_sha256': hashlib.sha256((ROOT/'uv.lock').read_bytes()).hexdigest(),
+                 'question_ids': [q['id'] for q in questions],
                  'workers': args.workers, 'sql_timeout': settings.sql_timeout,
                  'max_rows': settings.max_rows, 'metric': 'single_database_execution_multiset'},
               'records': []}
