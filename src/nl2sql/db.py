@@ -31,6 +31,8 @@ def quote(name: str) -> str:
 @contextmanager
 def connect(path: Path, timeout: float = 5) -> Iterator[sqlite3.Connection]:
     conn = sqlite3.connect(path.resolve().as_uri() + '?mode=ro', uri=True, timeout=timeout)
+    # surrogateescape 保留非法 UTF-8 字节差异，避免替换字符造成假相等。
+    conn.text_factory = lambda value: value.decode("utf-8", errors="surrogateescape")
     try:
         conn.execute('PRAGMA query_only=ON')
         conn.execute('PRAGMA trusted_schema=OFF')

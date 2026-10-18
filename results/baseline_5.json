@@ -1,0 +1,220 @@
+{
+  "kind": "spider_execution",
+  "status": "complete",
+  "metadata": {
+    "date": "2026-10-18T04:50:42.062257+00:00",
+    "mode": "baseline",
+    "model": "deepseek-flash",
+    "temperature": 0.0,
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 2048,
+    "extra_body": {
+      "thinking": {
+        "type": "disabled"
+      }
+    },
+    "git_commit": "58b8189de96ed77d7ae65d3c306431c671014009",
+    "git_dirty": false,
+    "code_sha256": "02a5d7a298f9f1b7ff46a6332e0f0dfad7c76715220b3e93f2c119855ed1b3e0",
+    "seed": 20261018,
+    "dev_sha256": "30d64a3fccde493226df79687aed9e4a1c0129525baf44f29c0573d914d758a4",
+    "question_ids": [
+      411,
+      674,
+      130,
+      936,
+      1028
+    ],
+    "workers": 4,
+    "sql_timeout": 5.0,
+    "max_rows": 100000,
+    "metric": "single_database_execution_multiset"
+  },
+  "records": [
+    {
+      "id": 411,
+      "db_id": "museum_visit",
+      "sql": "SELECT COUNT(*) FROM visitor WHERE Age < 30",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM visitor WHERE Age < 30;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 264,
+          "completion_tokens": 11,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 275,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6883935420009948
+        }
+      ],
+      "latency_seconds": 0.6980130000010831
+    },
+    {
+      "id": 674,
+      "db_id": "poker_player",
+      "sql": "SELECT Nationality, COUNT(*) AS count FROM people GROUP BY Nationality",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Nationality, COUNT(*) AS count FROM people GROUP BY Nationality"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 221,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 235,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8997736660021474
+        }
+      ],
+      "latency_seconds": 0.9075947920027829
+    },
+    {
+      "id": 130,
+      "db_id": "car_1",
+      "sql": "SELECT c.CountryName FROM countries AS c JOIN continents AS ct ON c.Continent = ct.ContId JOIN car_makers AS cm ON cm.Country = c.CountryId WHERE ct.Continent = 'Europe' GROUP BY c.CountryId, c.CountryName HAVING COUNT(cm.Id) >= 3 ORDER BY c.CountryName",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT c.CountryName\nFROM countries c\nJOIN continents ct ON c.Continent = ct.ContId\nJOIN car_makers cm ON cm.Country = c.CountryId\nWHERE ct.Continent = 'Europe'\nGROUP BY c.CountryId, c.CountryName\nHAVING COUNT(cm.Id) >= 3\nORDER BY c.CountryName;"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 415,
+          "completion_tokens": 77,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 492,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9231783750001341
+        }
+      ],
+      "latency_seconds": 0.9324946249980712
+    },
+    {
+      "id": 936,
+      "db_id": "dog_kennels",
+      "sql": "SELECT o.owner_id, o.last_name FROM Owners AS o JOIN Dogs AS d ON d.owner_id = o.owner_id JOIN Treatments AS t ON t.dog_id = d.dog_id GROUP BY o.owner_id, o.last_name ORDER BY COUNT(t.treatment_id) DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT o.owner_id, o.last_name\nFROM Owners o\nJOIN Dogs d ON d.owner_id = o.owner_id\nJOIN Treatments t ON t.dog_id = d.dog_id\nGROUP BY o.owner_id, o.last_name\nORDER BY COUNT(t.treatment_id) DESC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 772,
+          "completion_tokens": 70,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 842,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7982806669970159
+        }
+      ],
+      "latency_seconds": 0.8068018329977349
+    },
+    {
+      "id": 1028,
+      "db_id": "singer",
+      "sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 222,
+          "completion_tokens": 27,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 249,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8305481669995061
+        }
+      ],
+      "latency_seconds": 0.844634249999217
+    }
+  ],
+  "metrics": {
+    "n": 5,
+    "correct": 4,
+    "executable": 5,
+    "execution_accuracy": 0.8,
+    "executable_rate": 1.0,
+    "average_calls": 1.0,
+    "average_latency_seconds": 0.8379076999997779,
+    "total_calls": 5,
+    "total_tokens": 2093,
+    "reported_tokens": 2093,
+    "usage_complete": true,
+    "gold_errors": 0
+  },
+  "wall_seconds": 1.5514405829999305
+}
