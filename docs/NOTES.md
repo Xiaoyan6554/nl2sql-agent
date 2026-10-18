@@ -22,7 +22,8 @@
 
 - 已完成：Git 初始化、Python 环境声明、依赖清单、配置模板、忽略规则、官方数据下载及导入脚本。
 - 尚未完成：抽题、模型调用封装、基线、最小评测和真实验收；没有进入 Phase 1。
-- 阻塞证据：运行 `python3 scripts/download_spider.py` 返回非零状态，提示“下载内容不是 ZIP”。
+- 阻塞证据：运行 `python3 scripts/download_spider.py` 返回非零状态，提示“下载内容不是 ZIP”；
+  检查响应标题为 `Google Drive - Quota exceeded`，即官方共享文件下载配额超限。
 - 遵循 AGENTS.md 第 3 节：“若自动下载失败，停下来告诉用户手动下载到 data/spider/”。
 - 未进行任何 DeepSeek 调用，也未创建假数据或假结果。手动导入方式见 README。
 

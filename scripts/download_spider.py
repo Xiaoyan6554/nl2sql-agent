@@ -84,7 +84,8 @@ def main() -> int:
                     out.write(chunk)
         if not zipfile.is_zipfile(archive):
             raise ValueError("下载内容不是 ZIP，可能需要登录或人工确认")
-        digest = hashlib.file_digest(archive.open("rb"), "sha256").hexdigest()
+        with archive.open("rb") as source:
+            digest = hashlib.file_digest(source, "sha256").hexdigest()
         extract_dataset(archive, args.destination)
         manifest = {
             "source": OFFICIAL_PAGE,

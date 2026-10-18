@@ -3,7 +3,7 @@
 **个人项目，基于 Spider 公开数据集评测。**
 
 当前处于 Phase 0，项目尚未完成。已建立环境、依赖锁文件、密钥模板和官方数据下载脚本。
-Spider 自动下载返回非 ZIP 内容，按 `AGENTS.md` 要求暂停。
+Spider 官方 Google Drive 返回 `Quota exceeded`（下载配额超限）页面，按 `AGENTS.md` 要求暂停。
 尚未调用模型，也没有任何基线或消融评测数字。
 
 ## 下一步：准备官方数据
