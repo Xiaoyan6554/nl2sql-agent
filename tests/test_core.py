@@ -63,3 +63,22 @@ def test_invalid_utf8_preserves_distinction(database):
         conn.execute("INSERT INTO people VALUES (5, CAST(x'fe' AS TEXT), 50)")
     result = execute(database, 'SELECT name FROM people WHERE id >= 4 ORDER BY id')
     assert result['rows'][0] != result['rows'][1]
+
+
+def test_cte_union_aliases_and_strings(database):
+    assert execute(database, 'WITH a AS (SELECT name FROM people) SELECT name FROM a')['rows']
+    assert execute(database, "SELECT 'DROP TABLE people' AS harmless")['rows']
+    assert execute(database, 'SELECT id FROM people UNION SELECT age FROM people')['rows']
+    assert execute(database, 'SELECT p.name AS n FROM people p ORDER BY n')['rows']
+
+
+def test_sqlite_authorizer_independent_of_ast(database):
+    import sqlite3
+
+    from nl2sql.db import guard, schema
+    with connect(database) as conn:
+        guard(conn, schema(database), 5)
+        with pytest.raises(sqlite3.DatabaseError):
+            conn.execute('SELECT * FROM sqlite_master')
+        with pytest.raises(sqlite3.DatabaseError):
+            conn.execute("SELECT load_extension('x')")

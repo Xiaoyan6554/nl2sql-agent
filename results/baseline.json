@@ -1,0 +1,5295 @@
+{
+  "kind": "spider_execution",
+  "status": "complete",
+  "metadata": {
+    "date": "2026-10-18T04:51:22.254212+00:00",
+    "mode": "baseline",
+    "model": "deepseek-flash",
+    "temperature": 0.0,
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 2048,
+    "extra_body": {
+      "thinking": {
+        "type": "disabled"
+      }
+    },
+    "git_commit": "d44e6fc029039b40fcab9f623bd75ae39bf636e9",
+    "git_dirty": false,
+    "code_sha256": "2adc3dc4a905950164df306357ba26cffaabf2cd078ee18c11eec06fc8a5dede",
+    "seed": 20261018,
+    "dev_sha256": "30d64a3fccde493226df79687aed9e4a1c0129525baf44f29c0573d914d758a4",
+    "question_ids": [
+      411,
+      674,
+      130,
+      936,
+      1028,
+      236,
+      452,
+      114,
+      558,
+      524,
+      380,
+      749,
+      552,
+      520,
+      944,
+      50,
+      245,
+      885,
+      816,
+      129,
+      919,
+      655,
+      113,
+      77,
+      602,
+      807,
+      950,
+      227,
+      621,
+      770,
+      838,
+      217,
+      896,
+      560,
+      513,
+      64,
+      901,
+      752,
+      98,
+      697,
+      927,
+      703,
+      496,
+      0,
+      840,
+      79,
+      569,
+      104,
+      705,
+      175,
+      804,
+      92,
+      640,
+      596,
+      1019,
+      43,
+      581,
+      842,
+      32,
+      345,
+      1000,
+      729,
+      117,
+      923,
+      301,
+      99,
+      578,
+      59,
+      81,
+      725,
+      791,
+      470,
+      530,
+      233,
+      926,
+      766,
+      484,
+      502,
+      1024,
+      862,
+      889,
+      441,
+      531,
+      202,
+      30,
+      958,
+      734,
+      508,
+      585,
+      693,
+      845,
+      204,
+      1007,
+      750,
+      22,
+      136,
+      536,
+      120,
+      313,
+      414,
+      917,
+      205,
+      38,
+      915,
+      8,
+      383,
+      382,
+      720,
+      457,
+      208,
+      790,
+      118,
+      783,
+      603,
+      78,
+      636,
+      237,
+      855,
+      154,
+      193,
+      518,
+      626,
+      965,
+      937,
+      701,
+      367,
+      582,
+      992,
+      222,
+      419,
+      521,
+      409,
+      180,
+      611,
+      466,
+      456,
+      192,
+      828,
+      564,
+      262,
+      667,
+      389,
+      480,
+      858,
+      821,
+      327,
+      988,
+      939,
+      1029,
+      242
+    ],
+    "workers": 4,
+    "sql_timeout": 5.0,
+    "max_rows": 100000,
+    "metric": "single_database_execution_multiset"
+  },
+  "records": [
+    {
+      "id": 411,
+      "db_id": "museum_visit",
+      "sql": "SELECT COUNT(*) FROM visitor WHERE Age < 30",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM visitor WHERE Age < 30;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 264,
+          "completion_tokens": 11,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 275,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6264725000000908
+        }
+      ],
+      "latency_seconds": 0.6468555419996846
+    },
+    {
+      "id": 674,
+      "db_id": "poker_player",
+      "sql": "SELECT Nationality, COUNT(*) AS count FROM people GROUP BY Nationality",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Nationality, COUNT(*) AS count FROM people GROUP BY Nationality"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 221,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 235,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6353812499983178
+        }
+      ],
+      "latency_seconds": 0.6483430000007502
+    },
+    {
+      "id": 130,
+      "db_id": "car_1",
+      "sql": "SELECT c.CountryName FROM countries AS c JOIN continents AS ct ON c.Continent = ct.ContId JOIN car_makers AS cm ON cm.Country = c.CountryId WHERE ct.Continent = 'Europe' GROUP BY c.CountryId, c.CountryName HAVING COUNT(cm.Id) >= 3 ORDER BY c.CountryName",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT c.CountryName\nFROM countries c\nJOIN continents ct ON c.Continent = ct.ContId\nJOIN car_makers cm ON cm.Country = c.CountryId\nWHERE ct.Continent = 'Europe'\nGROUP BY c.CountryId, c.CountryName\nHAVING COUNT(cm.Id) >= 3\nORDER BY c.CountryName;"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 415,
+          "completion_tokens": 77,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 492,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7978853329987032
+        }
+      ],
+      "latency_seconds": 0.817581125000288
+    },
+    {
+      "id": 936,
+      "db_id": "dog_kennels",
+      "sql": "SELECT o.owner_id, o.last_name FROM Owners AS o JOIN Dogs AS d ON o.owner_id = d.owner_id JOIN Treatments AS t ON d.dog_id = t.dog_id GROUP BY o.owner_id, o.last_name ORDER BY SUM(t.cost_of_treatment) DESC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT o.owner_id, o.last_name\nFROM Owners o\nJOIN Dogs d ON o.owner_id = d.owner_id\nJOIN Treatments t ON d.dog_id = t.dog_id\nGROUP BY o.owner_id, o.last_name\nORDER BY SUM(t.cost_of_treatment) DESC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 772,
+          "completion_tokens": 72,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 844,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8092001250006433
+        }
+      ],
+      "latency_seconds": 0.8210424999997485
+    },
+    {
+      "id": 1028,
+      "db_id": "singer",
+      "sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 222,
+          "completion_tokens": 27,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 249,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7071963750022405
+        }
+      ],
+      "latency_seconds": 0.7184097499994095
+    },
+    {
+      "id": 236,
+      "db_id": "flight_2",
+      "sql": "SELECT a.Airline FROM airlines AS a JOIN flights AS f ON a.uid = f.Airline WHERE f.DestAirport = 'AHD'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT a.Airline FROM airlines AS a JOIN flights AS f ON a.uid = f.Airline WHERE f.DestAirport = 'AHD'"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 271,
+          "completion_tokens": 33,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 304,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0496537090002676
+        }
+      ],
+      "latency_seconds": 1.0573499589991115
+    },
+    {
+      "id": 452,
+      "db_id": "wta_1",
+      "sql": "SELECT p.first_name, p.country_code FROM players AS p WHERE p.player_id IN (SELECT m.winner_id FROM matches AS m WHERE m.tourney_name = 'WTA Championships') AND p.player_id IN (SELECT m.winner_id FROM matches AS m WHERE m.tourney_name = 'Australian Open')",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT p.first_name, p.country_code\nFROM players p\nWHERE p.player_id IN (\n    SELECT m.winner_id\n    FROM matches m\n    WHERE m.tourney_name = 'WTA Championships'\n)\nAND p.player_id IN (\n    SELECT m.winner_id\n    FROM matches m\n    WHERE m.tourney_name = 'Australian Open'\n);"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 486,
+          "completion_tokens": 77,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 563,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0621596249984577
+        }
+      ],
+      "latency_seconds": 1.072495082997193
+    },
+    {
+      "id": 114,
+      "db_id": "car_1",
+      "sql": "SELECT COUNT(*) FROM car_makers AS cm JOIN countries AS c ON cm.Country = c.CountryId WHERE c.CountryName = 'France'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM car_makers AS cm JOIN countries AS c ON cm.Country = c.CountryId WHERE c.CountryName = 'France';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 411,
+          "completion_tokens": 31,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 442,
+          "finish_reason": "stop",
+          "latency_seconds": 0.904849833001208
+        }
+      ],
+      "latency_seconds": 0.9099800000003597
+    },
+    {
+      "id": 558,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT s.first_name, s.middle_name, s.last_name FROM Students AS s ORDER BY s.date_left ASC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.first_name, s.middle_name, s.last_name\nFROM Students AS s\nORDER BY s.date_left ASC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 1001,
+          "completion_tokens": 31,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1032,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8220587910000177
+        }
+      ],
+      "latency_seconds": 0.8357867920021818
+    },
+    {
+      "id": 524,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT section_name, section_description FROM Sections",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 15,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT section_name, section_description FROM Sections"
+        },
+        {
+          "node": "execute",
+          "rows": 15
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 996,
+          "completion_tokens": 8,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1004,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8359240409990889
+        }
+      ],
+      "latency_seconds": 0.8553839999985939
+    },
+    {
+      "id": 380,
+      "db_id": "cre_Doc_Template_Mgt",
+      "sql": "SELECT d.Document_ID FROM Documents AS d JOIN Paragraphs AS p ON p.Document_ID = d.Document_ID WHERE p.Paragraph_Text IN ('Brazil', 'Ireland') GROUP BY d.Document_ID HAVING COUNT(DISTINCT p.Paragraph_Text) = 2",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT d.Document_ID\nFROM Documents d\nJOIN Paragraphs p ON p.Document_ID = d.Document_ID\nWHERE p.Paragraph_Text IN ('Brazil', 'Ireland')\nGROUP BY d.Document_ID\nHAVING COUNT(DISTINCT p.Paragraph_Text) = 2;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 382,
+          "completion_tokens": 63,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 445,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8153746660027537
+        }
+      ],
+      "latency_seconds": 0.8259821249994275
+    },
+    {
+      "id": 749,
+      "db_id": "world_1",
+      "sql": "SELECT c.Name FROM country AS c JOIN countrylanguage AS cl1 ON cl1.CountryCode = c.Code JOIN countrylanguage AS cl2 ON cl2.CountryCode = c.Code WHERE cl1.Language = 'English' AND cl1.IsOfficial = 'T' AND cl2.Language = 'French' AND cl2.IsOfficial = 'T' ORDER BY c.Name",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT c.Name\nFROM country c\nJOIN countrylanguage cl1 ON cl1.CountryCode = c.Code\nJOIN countrylanguage cl2 ON cl2.CountryCode = c.Code\nWHERE cl1.Language = 'English' AND cl1.IsOfficial = 'T'\n  AND cl2.Language = 'French' AND cl2.IsOfficial = 'T'\nORDER BY c.Name;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 359,
+          "completion_tokens": 82,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 441,
+          "finish_reason": "stop",
+          "latency_seconds": 1.164797458997782
+        }
+      ],
+      "latency_seconds": 1.186073832999682
+    },
+    {
+      "id": 552,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT T.transcript_id, T.transcript_date FROM Transcripts AS T JOIN Transcript_Contents AS TC ON T.transcript_id = TC.transcript_id GROUP BY T.transcript_id, T.transcript_date HAVING COUNT(TC.student_course_id) >= 2",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 4,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT T.transcript_id, T.transcript_date\nFROM Transcripts T\nJOIN Transcript_Contents TC ON T.transcript_id = TC.transcript_id\nGROUP BY T.transcript_id, T.transcript_date\nHAVING COUNT(TC.student_course_id) >= 2;"
+        },
+        {
+          "node": "execute",
+          "rows": 4
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 1002,
+          "completion_tokens": 61,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1063,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8704876660012815
+        }
+      ],
+      "latency_seconds": 0.8836045829993964
+    },
+    {
+      "id": 520,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT COUNT(*) FROM Degree_Programs",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM Degree_Programs;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 992,
+          "completion_tokens": 9,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1001,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7256630000010773
+        }
+      ],
+      "latency_seconds": 0.739394041000196
+    },
+    {
+      "id": 944,
+      "db_id": "dog_kennels",
+      "sql": "SELECT DISTINCT p.first_name, p.last_name FROM Professionals AS p JOIN Treatments AS t ON p.professional_id = t.professional_id WHERE t.cost_of_treatment < (SELECT AVG(cost_of_treatment) FROM Treatments)",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 5,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT p.first_name, p.last_name\nFROM Professionals p\nJOIN Treatments t ON p.professional_id = t.professional_id\nWHERE t.cost_of_treatment < (SELECT AVG(cost_of_treatment) FROM Treatments)"
+        },
+        {
+          "node": "execute",
+          "rows": 5
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 770,
+          "completion_tokens": 53,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 823,
+          "finish_reason": "stop",
+          "latency_seconds": 0.748134833000222
+        }
+      ],
+      "latency_seconds": 0.7580992090006475
+    },
+    {
+      "id": 50,
+      "db_id": "pets_1",
+      "sql": "SELECT PetType, MAX(weight) AS max_weight FROM Pets GROUP BY PetType",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT PetType, MAX(weight) AS max_weight FROM Pets GROUP BY PetType;"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 277,
+          "completion_tokens": 18,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 295,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7252410830005829
+        }
+      ],
+      "latency_seconds": 0.7346354170003906
+    },
+    {
+      "id": 245,
+      "db_id": "flight_2",
+      "sql": "SELECT f.FlightNo FROM flights AS f JOIN airlines AS a ON f.Airline = a.uid WHERE a.Airline = 'United Airlines'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 100,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT f.FlightNo FROM flights AS f JOIN airlines AS a ON f.Airline = a.uid WHERE a.Airline = 'United Airlines';"
+        },
+        {
+          "node": "execute",
+          "rows": 100
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 272,
+          "completion_tokens": 32,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 304,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8190760420002334
+        }
+      ],
+      "latency_seconds": 0.8260953749995679
+    },
+    {
+      "id": 885,
+      "db_id": "network_1",
+      "sql": "SELECT h.name, COUNT(f.friend_id) AS friend_count FROM Highschooler AS h LEFT JOIN Friend AS f ON h.ID = f.student_id GROUP BY h.ID, h.name",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 16,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT h.name, COUNT(f.friend_id) AS friend_count\nFROM Highschooler h\nLEFT JOIN Friend f ON h.ID = f.student_id\nGROUP BY h.ID, h.name;"
+        },
+        {
+          "node": "execute",
+          "rows": 16
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 279,
+          "completion_tokens": 41,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 320,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6752617500023916
+        }
+      ],
+      "latency_seconds": 0.6798968339971907
+    },
+    {
+      "id": 816,
+      "db_id": "world_1",
+      "sql": "SELECT c.Name AS Country, cl.Language, cl.Percentage FROM country AS c JOIN countrylanguage AS cl ON cl.CountryCode = c.Code WHERE cl.Percentage = (SELECT MAX(cl2.Percentage) FROM countrylanguage AS cl2 WHERE cl2.CountryCode = c.Code) ORDER BY c.Name",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 241,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT c.Name AS Country, cl.Language, cl.Percentage\nFROM country c\nJOIN countrylanguage cl ON cl.CountryCode = c.Code\nWHERE cl.Percentage = (\n    SELECT MAX(cl2.Percentage)\n    FROM countrylanguage cl2\n    WHERE cl2.CountryCode = c.Code\n)\nORDER BY c.Name;"
+        },
+        {
+          "node": "execute",
+          "rows": 241
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 361,
+          "completion_tokens": 70,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 431,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0760102500025823
+        }
+      ],
+      "latency_seconds": 1.0888390410000284
+    },
+    {
+      "id": 129,
+      "db_id": "car_1",
+      "sql": "SELECT c.CountryName FROM countries AS c JOIN continents AS ct ON c.Continent = ct.ContId JOIN car_makers AS cm ON cm.Country = c.CountryId WHERE ct.Continent = 'Europe' GROUP BY c.CountryId, c.CountryName HAVING COUNT(cm.Id) >= 3 ORDER BY c.CountryName",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT c.CountryName\nFROM countries c\nJOIN continents ct ON c.Continent = ct.ContId\nJOIN car_makers cm ON cm.Country = c.CountryId\nWHERE ct.Continent = 'Europe'\nGROUP BY c.CountryId, c.CountryName\nHAVING COUNT(cm.Id) >= 3\nORDER BY c.CountryName;"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 412,
+          "completion_tokens": 77,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 489,
+          "finish_reason": "stop",
+          "latency_seconds": 1.02761725000164
+        }
+      ],
+      "latency_seconds": 1.0411717499991937
+    },
+    {
+      "id": 919,
+      "db_id": "dog_kennels",
+      "sql": "SELECT state FROM Owners INTERSECT SELECT state FROM Professionals ORDER BY state",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT state FROM Owners INTERSECT SELECT state FROM Professionals ORDER BY state;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 760,
+          "completion_tokens": 15,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 775,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9664307499988354
+        }
+      ],
+      "latency_seconds": 0.9720194580004318
+    },
+    {
+      "id": 655,
+      "db_id": "poker_player",
+      "sql": "SELECT Money_Rank FROM poker_player ORDER BY Earnings DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Money_Rank FROM poker_player ORDER BY Earnings DESC LIMIT 1"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 226,
+          "completion_tokens": 15,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 241,
+          "finish_reason": "stop",
+          "latency_seconds": 0.947170332998212
+        }
+      ],
+      "latency_seconds": 0.9503309159990749
+    },
+    {
+      "id": 113,
+      "db_id": "car_1",
+      "sql": "SELECT COUNT(*) FROM car_makers AS cm JOIN countries AS c ON cm.Country = c.CountryId WHERE c.CountryName = 'france'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM car_makers AS cm JOIN countries AS c ON cm.Country = c.CountryId WHERE c.CountryName = 'france';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 410,
+          "completion_tokens": 32,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 442,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7948994170001242
+        }
+      ],
+      "latency_seconds": 0.8057444160003797
+    },
+    {
+      "id": 77,
+      "db_id": "pets_1",
+      "sql": "SELECT Pets.PetID FROM Has_Pet JOIN Student ON Has_Pet.StuID = Student.StuID JOIN Pets ON Has_Pet.PetID = Pets.PetID WHERE Student.LName = 'Smith'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Pets.PetID FROM Has_Pet JOIN Student ON Has_Pet.StuID = Student.StuID JOIN Pets ON Has_Pet.PetID = Pets.PetID WHERE Student.LName = 'Smith'"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 282,
+          "completion_tokens": 45,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 327,
+          "finish_reason": "stop",
+          "latency_seconds": 1.049256709000474
+        }
+      ],
+      "latency_seconds": 1.0602873329989961
+    },
+    {
+      "id": 602,
+      "db_id": "tvshow",
+      "sql": "SELECT Package_Option FROM TV_Channel WHERE series_name = 'Sky Radio'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Package_Option FROM TV_Channel WHERE series_name = 'Sky Radio';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 345,
+          "completion_tokens": 16,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 361,
+          "finish_reason": "stop",
+          "latency_seconds": 0.5368856669992965
+        }
+      ],
+      "latency_seconds": 0.5469311249980819
+    },
+    {
+      "id": 807,
+      "db_id": "world_1",
+      "sql": "SELECT COUNT(*) FROM country WHERE Continent = 'Asia'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM country WHERE Continent = 'Asia';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 354,
+          "completion_tokens": 11,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 365,
+          "finish_reason": "stop",
+          "latency_seconds": 0.5540000000000873
+        }
+      ],
+      "latency_seconds": 0.5582030000005034
+    },
+    {
+      "id": 950,
+      "db_id": "dog_kennels",
+      "sql": "SELECT o.first_name, o.last_name, s.size_description FROM Owners AS o JOIN Dogs AS d ON o.owner_id = d.owner_id JOIN Sizes AS s ON d.size_code = s.size_code",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 15,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT o.first_name, o.last_name, s.size_description\nFROM Owners o\nJOIN Dogs d ON o.owner_id = d.owner_id\nJOIN Sizes s ON d.size_code = s.size_code;"
+        },
+        {
+          "node": "execute",
+          "rows": 15
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 769,
+          "completion_tokens": 46,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 815,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8572910830007459
+        }
+      ],
+      "latency_seconds": 0.8639050839992706
+    },
+    {
+      "id": 227,
+      "db_id": "flight_2",
+      "sql": "SELECT a.AirportCode FROM airports AS a LEFT JOIN flights AS f ON a.AirportCode = f.SourceAirport OR a.AirportCode = f.DestAirport GROUP BY a.AirportCode ORDER BY COUNT(f.FlightNo) ASC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT a.AirportCode\nFROM airports a\nLEFT JOIN flights f\n  ON a.AirportCode = f.SourceAirport OR a.AirportCode = f.DestAirport\nGROUP BY a.AirportCode\nORDER BY COUNT(f.FlightNo) ASC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 274,
+          "completion_tokens": 65,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 339,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9198480420018313
+        }
+      ],
+      "latency_seconds": 0.9565322909984388
+    },
+    {
+      "id": 621,
+      "db_id": "tvshow",
+      "sql": "SELECT Weekly_Rank FROM TV_series WHERE Episode = 'A Love of a Lifetime'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Weekly_Rank FROM TV_series WHERE Episode = 'A Love of a Lifetime';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 346,
+          "completion_tokens": 18,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 364,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8784307920032006
+        }
+      ],
+      "latency_seconds": 0.8857169169968984
+    },
+    {
+      "id": 770,
+      "db_id": "world_1",
+      "sql": "SELECT COUNT(DISTINCT cl.Language) FROM countrylanguage AS cl JOIN country AS c ON cl.CountryCode = c.Code WHERE cl.IsOfficial = 'T' AND c.IndepYear < 1930",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(DISTINCT cl.Language) FROM countrylanguage cl JOIN country c ON cl.CountryCode = c.Code WHERE cl.IsOfficial = 'T' AND c.IndepYear < 1930;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 367,
+          "completion_tokens": 43,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 410,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8461491669986572
+        }
+      ],
+      "latency_seconds": 0.8580517919981503
+    },
+    {
+      "id": 838,
+      "db_id": "orchestra",
+      "sql": "SELECT Name FROM conductor ORDER BY Year_of_Work DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM conductor ORDER BY Year_of_Work DESC LIMIT 1"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 379,
+          "completion_tokens": 15,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 394,
+          "finish_reason": "stop",
+          "latency_seconds": 0.846116583001276
+        }
+      ],
+      "latency_seconds": 0.8541136249987176
+    },
+    {
+      "id": 217,
+      "db_id": "flight_2",
+      "sql": "SELECT COUNT(*) FROM flights AS T1 INNER JOIN airlines AS T2 ON T1.Airline = T2.uid WHERE T2.Airline = 'United Airlines' AND T1.SourceAirport = 'AHD'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM flights AS T1 INNER JOIN airlines AS T2 ON T1.Airline = T2.uid WHERE T2.Airline = 'United Airlines' AND T1.SourceAirport = 'AHD'"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 275,
+          "completion_tokens": 49,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 324,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0137800840020645
+        }
+      ],
+      "latency_seconds": 1.0217792920011561
+    },
+    {
+      "id": 896,
+      "db_id": "network_1",
+      "sql": "SELECT h.name FROM Highschooler AS h WHERE NOT EXISTS(SELECT 1 FROM Friend AS f WHERE f.student_id = h.ID)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT h.name FROM Highschooler h WHERE NOT EXISTS (SELECT 1 FROM Friend f WHERE f.student_id = h.ID)"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 276,
+          "completion_tokens": 27,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 303,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8560629169987806
+        }
+      ],
+      "latency_seconds": 0.8659562499997264
+    },
+    {
+      "id": 560,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT s.first_name FROM Students AS s JOIN Addresses AS cur ON s.current_address_id = cur.address_id JOIN Addresses AS perm ON s.permanent_address_id = perm.address_id WHERE cur.line_1 <> perm.line_1 OR cur.line_2 <> perm.line_2 OR cur.line_3 <> perm.line_3 OR cur.city <> perm.city OR cur.zip_postcode <> perm.zip_postcode OR cur.state_province_county <> perm.state_province_county OR cur.country <> perm.country OR cur.other_address_details <> perm.other_address_details",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 14,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.first_name FROM Students AS s JOIN Addresses AS cur ON s.current_address_id = cur.address_id JOIN Addresses AS perm ON s.permanent_address_id = perm.address_id WHERE cur.line_1 <> perm.line_1 OR cur.line_2 <> perm.line_2 OR cur.line_3 <> perm.line_3 OR cur.city <> perm.city OR cur.zip_postcode <> perm.zip_postcode OR cur.state_province_county <> perm.state_province_county OR cur.country <> perm.country OR cur.other_address_details <> perm.other_address_details"
+        },
+        {
+          "node": "execute",
+          "rows": 14
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 1005,
+          "completion_tokens": 119,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1124,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8655384999983653
+        }
+      ],
+      "latency_seconds": 0.88110379200225
+    },
+    {
+      "id": 513,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT zip_postcode FROM Addresses WHERE city = 'Port Chelsea'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT zip_postcode FROM Addresses WHERE city = 'Port Chelsea'"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 999,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1013,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9290054160010186
+        }
+      ],
+      "latency_seconds": 0.9398225840013765
+    },
+    {
+      "id": 64,
+      "db_id": "pets_1",
+      "sql": "SELECT StuID FROM Student WHERE NOT StuID IN (SELECT T1.StuID FROM Has_Pet AS T1 INNER JOIN Pets AS T2 ON T1.PetID = T2.PetID WHERE T2.PetType = 'cat')",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 33,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT StuID FROM Student WHERE StuID NOT IN (SELECT T1.StuID FROM Has_Pet AS T1 INNER JOIN Pets AS T2 ON T1.PetID = T2.PetID WHERE T2.PetType = 'cat')"
+        },
+        {
+          "node": "execute",
+          "rows": 33
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 280,
+          "completion_tokens": 55,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 335,
+          "finish_reason": "stop",
+          "latency_seconds": 0.687489166000887
+        }
+      ],
+      "latency_seconds": 0.693700333002198
+    },
+    {
+      "id": 901,
+      "db_id": "network_1",
+      "sql": "SELECT DISTINCT h.name FROM Highschooler AS h WHERE EXISTS(SELECT 1 FROM Friend AS f WHERE f.student_id = h.ID) AND EXISTS(SELECT 1 FROM Likes AS l WHERE l.liked_id = h.ID)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 8,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT h.name\nFROM Highschooler h\nWHERE EXISTS (\n    SELECT 1 FROM Friend f WHERE f.student_id = h.ID\n)\nAND EXISTS (\n    SELECT 1 FROM Likes l WHERE l.liked_id = h.ID\n);"
+        },
+        {
+          "node": "execute",
+          "rows": 8
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 278,
+          "completion_tokens": 52,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 330,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0916344590004883
+        }
+      ],
+      "latency_seconds": 1.1016910830003326
+    },
+    {
+      "id": 752,
+      "db_id": "world_1",
+      "sql": "SELECT DISTINCT country.Region FROM country JOIN countrylanguage ON country.Code = countrylanguage.CountryCode WHERE countrylanguage.Language IN ('English', 'Dutch')",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 20,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT country.Region\nFROM country\nJOIN countrylanguage ON country.Code = countrylanguage.CountryCode\nWHERE countrylanguage.Language IN ('English', 'Dutch');"
+        },
+        {
+          "node": "execute",
+          "rows": 20
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 356,
+          "completion_tokens": 36,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 392,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9469817919998604
+        }
+      ],
+      "latency_seconds": 0.9503566249986761
+    },
+    {
+      "id": 98,
+      "db_id": "car_1",
+      "sql": "SELECT model_list.Model FROM model_list JOIN car_names ON model_list.ModelId = car_names.MakeId JOIN cars_data ON car_names.MakeId = cars_data.Id WHERE cars_data.Weight < (SELECT AVG(Weight) FROM cars_data)",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 12,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT model_list.Model FROM model_list JOIN car_names ON model_list.ModelId = car_names.MakeId JOIN cars_data ON car_names.MakeId = cars_data.Id WHERE cars_data.Weight < (SELECT AVG(Weight) FROM cars_data)"
+        },
+        {
+          "node": "execute",
+          "rows": 12
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 415,
+          "completion_tokens": 51,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 466,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7323045409975748
+        }
+      ],
+      "latency_seconds": 0.7367995419990621
+    },
+    {
+      "id": 697,
+      "db_id": "voter_1",
+      "sql": "SELECT COUNT(*) FROM CONTESTANTS AS c WHERE NOT EXISTS(SELECT 1 FROM VOTES AS v WHERE v.contestant_number = c.contestant_number)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM CONTESTANTS c WHERE NOT EXISTS (SELECT 1 FROM VOTES v WHERE v.contestant_number = c.contestant_number);"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 251,
+          "completion_tokens": 33,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 284,
+          "finish_reason": "stop",
+          "latency_seconds": 0.613832041999558
+        }
+      ],
+      "latency_seconds": 0.6173920420005743
+    },
+    {
+      "id": 927,
+      "db_id": "dog_kennels",
+      "sql": "SELECT first_name FROM Professionals UNION SELECT first_name FROM Owners EXCEPT SELECT name FROM Dogs ORDER BY first_name",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 30,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT first_name FROM Professionals\nUNION\nSELECT first_name FROM Owners\nEXCEPT\nSELECT name FROM Dogs\nORDER BY first_name;"
+        },
+        {
+          "node": "execute",
+          "rows": 30
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 769,
+          "completion_tokens": 28,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 797,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0479099589974794
+        }
+      ],
+      "latency_seconds": 1.053575792000629
+    },
+    {
+      "id": 703,
+      "db_id": "world_1",
+      "sql": "SELECT Name FROM country WHERE IndepYear > 1950",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 110,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM country WHERE IndepYear > 1950;"
+        },
+        {
+          "node": "execute",
+          "rows": 110
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 360,
+          "completion_tokens": 13,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 373,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8780182080008672
+        }
+      ],
+      "latency_seconds": 0.8818251250013418
+    },
+    {
+      "id": 496,
+      "db_id": "battle_death",
+      "sql": "SELECT death.killed, death.injured, death.note FROM death JOIN ship ON death.caused_by_ship_id = ship.id WHERE ship.tonnage = 't'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 11,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT death.killed, death.injured, death.note\nFROM death\nJOIN ship ON death.caused_by_ship_id = ship.id\nWHERE ship.tonnage = 't';"
+        },
+        {
+          "node": "execute",
+          "rows": 11
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 300,
+          "completion_tokens": 41,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 341,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7794075420024456
+        }
+      ],
+      "latency_seconds": 0.7838969999975234
+    },
+    {
+      "id": 0,
+      "db_id": "concert_singer",
+      "sql": "SELECT COUNT(*) FROM singer",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM singer;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 353,
+          "completion_tokens": 6,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 359,
+          "finish_reason": "stop",
+          "latency_seconds": 0.709292416999233
+        }
+      ],
+      "latency_seconds": 0.7197189580001577
+    },
+    {
+      "id": 840,
+      "db_id": "orchestra",
+      "sql": "SELECT conductor.Name, orchestra.Orchestra FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 12,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT conductor.Name, orchestra.Orchestra\nFROM conductor\nJOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID;"
+        },
+        {
+          "node": "execute",
+          "rows": 12
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 379,
+          "completion_tokens": 27,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 406,
+          "finish_reason": "stop",
+          "latency_seconds": 1.6247299999995448
+        }
+      ],
+      "latency_seconds": 1.6363861669997277
+    },
+    {
+      "id": 79,
+      "db_id": "pets_1",
+      "sql": "SELECT s.StuID, COUNT(hp.PetID) AS pet_count FROM Student AS s JOIN Has_Pet AS hp ON s.StuID = hp.StuID GROUP BY s.StuID",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.StuID, COUNT(hp.PetID) AS pet_count\nFROM Student s\nJOIN Has_Pet hp ON s.StuID = hp.StuID\nGROUP BY s.StuID;"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 281,
+          "completion_tokens": 45,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 326,
+          "finish_reason": "stop",
+          "latency_seconds": 1.1225011669994274
+        }
+      ],
+      "latency_seconds": 1.1278923340032634
+    },
+    {
+      "id": 569,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT MAX(transcript_date) AS last_transcript_release_date FROM Transcripts",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT MAX(transcript_date) AS last_transcript_release_date FROM Transcripts;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 993,
+          "completion_tokens": 18,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1011,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9732625420001568
+        }
+      ],
+      "latency_seconds": 0.9827225839981111
+    },
+    {
+      "id": 104,
+      "db_id": "car_1",
+      "sql": "SELECT DISTINCT model_list.Model FROM model_list JOIN car_names ON car_names.Model = model_list.Model JOIN cars_data ON cars_data.Id = car_names.MakeId WHERE cars_data.Year > 1980 ORDER BY model_list.Model",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 21,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT model_list.Model\nFROM model_list\nJOIN car_names ON car_names.Model = model_list.Model\nJOIN cars_data ON cars_data.Id = car_names.MakeId\nWHERE cars_data.Year > 1980\nORDER BY model_list.Model;"
+        },
+        {
+          "node": "execute",
+          "rows": 21
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 414,
+          "completion_tokens": 55,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 469,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0799264169982052
+        }
+      ],
+      "latency_seconds": 1.0870736249999027
+    },
+    {
+      "id": 705,
+      "db_id": "world_1",
+      "sql": "SELECT COUNT(*) FROM country WHERE GovernmentForm LIKE '%Republic%'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM country WHERE GovernmentForm LIKE '%Republic%';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 356,
+          "completion_tokens": 13,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 369,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9825384589967143
+        }
+      ],
+      "latency_seconds": 0.9961142920001294
+    },
+    {
+      "id": 175,
+      "db_id": "car_1",
+      "sql": "SELECT cm.Id, cm.Maker FROM car_makers AS cm JOIN model_list AS ml ON ml.Maker = cm.Id GROUP BY cm.Id, cm.Maker HAVING COUNT(ml.ModelId) >= 2 AND (SELECT COUNT(*) FROM car_makers) > 3",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 7,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT cm.Id, cm.Maker\nFROM car_makers cm\nJOIN model_list ml ON ml.Maker = cm.Id\nGROUP BY cm.Id, cm.Maker\nHAVING COUNT(ml.ModelId) >= 2\nAND (SELECT COUNT(*) FROM car_makers) > 3;"
+        },
+        {
+          "node": "execute",
+          "rows": 7
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 428,
+          "completion_tokens": 63,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 491,
+          "finish_reason": "stop",
+          "latency_seconds": 1.016237584000919
+        }
+      ],
+      "latency_seconds": 1.0206280000020342
+    },
+    {
+      "id": 804,
+      "db_id": "world_1",
+      "sql": "SELECT Name FROM country ORDER BY Population ASC LIMIT 3",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM country ORDER BY Population ASC LIMIT 3;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 360,
+          "completion_tokens": 13,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 373,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8576924999979383
+        }
+      ],
+      "latency_seconds": 0.862580416000128
+    },
+    {
+      "id": 92,
+      "db_id": "car_1",
+      "sql": "SELECT COUNT(*) FROM countries",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM countries;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 405,
+          "completion_tokens": 6,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 411,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9601754590003111
+        }
+      ],
+      "latency_seconds": 0.9697737089991278
+    },
+    {
+      "id": 640,
+      "db_id": "tvshow",
+      "sql": "SELECT Pixel_aspect_ratio_PAR, Country FROM TV_Channel WHERE Language <> 'English'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 12,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Pixel_aspect_ratio_PAR, Country FROM TV_Channel WHERE Language <> 'English';"
+        },
+        {
+          "node": "execute",
+          "rows": 12
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 349,
+          "completion_tokens": 19,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 368,
+          "finish_reason": "stop",
+          "latency_seconds": 1.2258716249998542
+        }
+      ],
+      "latency_seconds": 1.2349340000000666
+    },
+    {
+      "id": 596,
+      "db_id": "tvshow",
+      "sql": "SELECT Country, COUNT(*) AS channel_count FROM TV_Channel GROUP BY Country ORDER BY channel_count DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Country, COUNT(*) AS channel_count FROM TV_Channel GROUP BY Country ORDER BY channel_count DESC LIMIT 1"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 347,
+          "completion_tokens": 24,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 371,
+          "finish_reason": "stop",
+          "latency_seconds": 1.001456624999264
+        }
+      ],
+      "latency_seconds": 1.0126789159985492
+    },
+    {
+      "id": 1019,
+      "db_id": "singer",
+      "sql": "SELECT song.Title, singer.Name FROM song JOIN singer ON song.Singer_ID = singer.Singer_ID",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 8,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT song.Title, singer.Name FROM song JOIN singer ON song.Singer_ID = singer.Singer_ID"
+        },
+        {
+          "node": "execute",
+          "rows": 8
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 212,
+          "completion_tokens": 20,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 232,
+          "finish_reason": "stop",
+          "latency_seconds": 0.5503392499995243
+        }
+      ],
+      "latency_seconds": 0.5582837910005765
+    },
+    {
+      "id": 43,
+      "db_id": "concert_singer",
+      "sql": "SELECT COUNT(*) FROM concert WHERE Stadium_ID = (SELECT Stadium_ID FROM stadium ORDER BY Capacity DESC LIMIT 1)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM concert WHERE Stadium_ID = (SELECT Stadium_ID FROM stadium ORDER BY Capacity DESC LIMIT 1)"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 361,
+          "completion_tokens": 24,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 385,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0315740000005462
+        }
+      ],
+      "latency_seconds": 1.038663125000312
+    },
+    {
+      "id": 581,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT section_id, course_id, section_name, section_description, other_details FROM Sections WHERE section_name = 'h'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT section_id, course_id, section_name, section_description, other_details FROM Sections WHERE section_name = 'h'"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 990,
+          "completion_tokens": 24,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1014,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9820779170004243
+        }
+      ],
+      "latency_seconds": 0.9870183750026627
+    },
+    {
+      "id": 842,
+      "db_id": "orchestra",
+      "sql": "SELECT c.Name FROM conductor AS c JOIN orchestra AS o ON c.Conductor_ID = o.Conductor_ID GROUP BY c.Conductor_ID, c.Name HAVING COUNT(DISTINCT o.Orchestra_ID) > 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT c.Name\nFROM conductor c\nJOIN orchestra o ON c.Conductor_ID = o.Conductor_ID\nGROUP BY c.Conductor_ID, c.Name\nHAVING COUNT(DISTINCT o.Orchestra_ID) > 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 380,
+          "completion_tokens": 51,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 431,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9917577500018524
+        }
+      ],
+      "latency_seconds": 0.9983126669976627
+    },
+    {
+      "id": 32,
+      "db_id": "concert_singer",
+      "sql": "SELECT Name FROM stadium WHERE NOT Stadium_ID IN (SELECT Stadium_ID FROM concert WHERE Year = '2014')",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 6,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM stadium WHERE Stadium_ID NOT IN (SELECT Stadium_ID FROM concert WHERE Year = '2014')"
+        },
+        {
+          "node": "execute",
+          "rows": 6
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 365,
+          "completion_tokens": 22,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 387,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8415700420009671
+        }
+      ],
+      "latency_seconds": 0.851083124998695
+    },
+    {
+      "id": 345,
+      "db_id": "cre_Doc_Template_Mgt",
+      "sql": "SELECT t.Template_Type_Code FROM Ref_Template_Types AS t WHERE NOT EXISTS(SELECT 1 FROM Templates AS tm JOIN Documents AS d ON d.Template_ID = tm.Template_ID WHERE tm.Template_Type_Code = t.Template_Type_Code)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT t.Template_Type_Code\nFROM Ref_Template_Types t\nWHERE NOT EXISTS (\n    SELECT 1\n    FROM Templates tm\n    JOIN Documents d ON d.Template_ID = tm.Template_ID\n    WHERE tm.Template_Type_Code = t.Template_Type_Code\n)"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 376,
+          "completion_tokens": 65,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 441,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6836910830024863
+        }
+      ],
+      "latency_seconds": 0.6936400000013236
+    },
+    {
+      "id": 1000,
+      "db_id": "singer",
+      "sql": "SELECT COUNT(*) FROM singer",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM singer;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 209,
+          "completion_tokens": 6,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 215,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9322435410031176
+        }
+      ],
+      "latency_seconds": 0.9413912919990253
+    },
+    {
+      "id": 729,
+      "db_id": "world_1",
+      "sql": "SELECT SUM(Population) FROM city WHERE District = 'Gelderland'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT SUM(Population) FROM city WHERE District = 'Gelderland';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 357,
+          "completion_tokens": 17,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 374,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8973903330006578
+        }
+      ],
+      "latency_seconds": 0.9088194579999254
+    },
+    {
+      "id": 117,
+      "db_id": "car_1",
+      "sql": "SELECT AVG(CAST(MPG AS REAL)) FROM cars_data WHERE Cylinders = 4",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT AVG(CAST(MPG AS REAL)) FROM cars_data WHERE Cylinders = 4;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 418,
+          "completion_tokens": 21,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 439,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0160469590009598
+        }
+      ],
+      "latency_seconds": 1.0255408749981143
+    },
+    {
+      "id": 923,
+      "db_id": "dog_kennels",
+      "sql": "SELECT p.professional_id, p.last_name, p.cell_number FROM Professionals AS p WHERE p.state = 'Indiana' OR p.professional_id IN (SELECT t.professional_id FROM Treatments AS t GROUP BY t.professional_id HAVING COUNT(*) > 2)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT p.professional_id, p.last_name, p.cell_number\nFROM Professionals p\nWHERE p.state = 'Indiana'\n   OR p.professional_id IN (\n       SELECT t.professional_id\n       FROM Treatments t\n       GROUP BY t.professional_id\n       HAVING COUNT(*) > 2\n   );"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 777,
+          "completion_tokens": 71,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 848,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9805769170015992
+        }
+      ],
+      "latency_seconds": 0.9886049999986426
+    },
+    {
+      "id": 301,
+      "db_id": "cre_Doc_Template_Mgt",
+      "sql": "SELECT d.Document_Name, d.Template_ID FROM Documents AS d WHERE d.Document_Description LIKE '%w%'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT d.Document_Name, d.Template_ID\nFROM Documents d\nWHERE d.Document_Description LIKE '%w%';"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 384,
+          "completion_tokens": 26,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 410,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6635300410016498
+        }
+      ],
+      "latency_seconds": 0.6672438329987926
+    },
+    {
+      "id": 99,
+      "db_id": "car_1",
+      "sql": "SELECT DISTINCT car_makers.Maker FROM car_makers JOIN model_list ON car_makers.Id = model_list.Maker JOIN car_names ON model_list.Model = car_names.Model JOIN cars_data ON car_names.MakeId = cars_data.Id WHERE cars_data.Year = 1970",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 11,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT car_makers.Maker\nFROM car_makers\nJOIN model_list ON car_makers.Id = model_list.Maker\nJOIN car_names ON model_list.Model = car_names.Model\nJOIN cars_data ON car_names.MakeId = cars_data.Id\nWHERE cars_data.Year = 1970;"
+        },
+        {
+          "node": "execute",
+          "rows": 11
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 418,
+          "completion_tokens": 67,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 485,
+          "finish_reason": "stop",
+          "latency_seconds": 1.1877374590003456
+        }
+      ],
+      "latency_seconds": 1.1969684579999011
+    },
+    {
+      "id": 578,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT DISTINCT a.* FROM Addresses AS a JOIN Students AS s ON s.current_address_id = a.address_id OR s.permanent_address_id = a.address_id ORDER BY a.address_id",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 14,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT a.* FROM Addresses a JOIN Students s ON s.current_address_id = a.address_id OR s.permanent_address_id = a.address_id ORDER BY a.address_id;"
+        },
+        {
+          "node": "execute",
+          "rows": 14
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 996,
+          "completion_tokens": 37,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1033,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9255141670000739
+        }
+      ],
+      "latency_seconds": 0.9344806670014805
+    },
+    {
+      "id": 59,
+      "db_id": "pets_1",
+      "sql": "SELECT s.Fname FROM Student AS s WHERE s.StuID IN (SELECT hp.StuID FROM Has_Pet AS hp JOIN Pets AS p ON hp.PetID = p.PetID WHERE p.PetType = 'cat') AND s.StuID IN (SELECT hp.StuID FROM Has_Pet AS hp JOIN Pets AS p ON hp.PetID = p.PetID WHERE p.PetType = 'dog')",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.Fname\nFROM Student s\nWHERE s.StuID IN (\n  SELECT hp.StuID\n  FROM Has_Pet hp\n  JOIN Pets p ON hp.PetID = p.PetID\n  WHERE p.PetType = 'cat'\n)\nAND s.StuID IN (\n  SELECT hp.StuID\n  FROM Has_Pet hp\n  JOIN Pets p ON hp.PetID = p.PetID\n  WHERE p.PetType = 'dog'\n);"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 280,
+          "completion_tokens": 103,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 383,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7786528329997964
+        }
+      ],
+      "latency_seconds": 0.7949603339984606
+    },
+    {
+      "id": 81,
+      "db_id": "pets_1",
+      "sql": "SELECT s.Fname, s.Sex FROM Student AS s JOIN Has_Pet AS hp ON s.StuID = hp.StuID GROUP BY s.StuID, s.Fname, s.Sex HAVING COUNT(hp.PetID) > 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.Fname, s.Sex FROM Student s JOIN Has_Pet hp ON s.StuID = hp.StuID GROUP BY s.StuID, s.Fname, s.Sex HAVING COUNT(hp.PetID) > 1"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 280,
+          "completion_tokens": 53,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 333,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0863396659988211
+        }
+      ],
+      "latency_seconds": 1.09600904099716
+    },
+    {
+      "id": 725,
+      "db_id": "world_1",
+      "sql": "SELECT AVG(LifeExpectancy) FROM country WHERE Continent = 'Africa' AND GovernmentForm = 'Republic'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT AVG(LifeExpectancy) FROM country WHERE Continent = 'Africa' AND GovernmentForm = 'Republic';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 360,
+          "completion_tokens": 23,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 383,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6949704590006149
+        }
+      ],
+      "latency_seconds": 0.7063395419972949
+    },
+    {
+      "id": 791,
+      "db_id": "world_1",
+      "sql": "SELECT Name, Population, HeadOfState FROM country ORDER BY SurfaceArea DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name, Population, HeadOfState FROM country ORDER BY SurfaceArea DESC LIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 365,
+          "completion_tokens": 20,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 385,
+          "finish_reason": "stop",
+          "latency_seconds": 1.40488225000081
+        }
+      ],
+      "latency_seconds": 1.407888792000449
+    },
+    {
+      "id": 470,
+      "db_id": "wta_1",
+      "sql": "SELECT p.first_name, AVG(r.ranking) AS average_ranking FROM players AS p JOIN rankings AS r ON p.player_id = r.player_id GROUP BY p.player_id, p.first_name",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2775,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT p.first_name, AVG(r.ranking) AS average_ranking\nFROM players p\nJOIN rankings r ON p.player_id = r.player_id\nGROUP BY p.player_id, p.first_name;"
+        },
+        {
+          "node": "execute",
+          "rows": 2775
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 478,
+          "completion_tokens": 43,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 521,
+          "finish_reason": "stop",
+          "latency_seconds": 1.008718332999706
+        }
+      ],
+      "latency_seconds": 1.4244047499996668
+    },
+    {
+      "id": 530,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT s.semester_id, s.semester_name FROM Semesters AS s JOIN Student_Enrolment AS se ON se.semester_id = s.semester_id GROUP BY s.semester_id, s.semester_name ORDER BY COUNT(DISTINCT se.student_id) DESC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.semester_id, s.semester_name\nFROM Semesters s\nJOIN Student_Enrolment se ON se.semester_id = s.semester_id\nGROUP BY s.semester_id, s.semester_name\nORDER BY COUNT(DISTINCT se.student_id) DESC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 1004,
+          "completion_tokens": 71,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1075,
+          "finish_reason": "stop",
+          "latency_seconds": 1.142809999997553
+        }
+      ],
+      "latency_seconds": 1.146704792001401
+    },
+    {
+      "id": 233,
+      "db_id": "flight_2",
+      "sql": "SELECT DISTINCT a.Airline FROM airlines AS a JOIN flights AS f ON a.uid = f.Airline WHERE f.SourceAirport = 'AHD'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT a.Airline FROM airlines a JOIN flights f ON a.uid = f.Airline WHERE f.SourceAirport = 'AHD'"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 275,
+          "completion_tokens": 33,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 308,
+          "finish_reason": "stop",
+          "latency_seconds": 0.4597880829969654
+        }
+      ],
+      "latency_seconds": 0.4663999160002277
+    },
+    {
+      "id": 926,
+      "db_id": "dog_kennels",
+      "sql": "SELECT first_name FROM Professionals UNION SELECT first_name FROM Owners EXCEPT SELECT name FROM Dogs",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 30,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT first_name FROM Professionals\nUNION\nSELECT first_name FROM Owners\nEXCEPT\nSELECT name FROM Dogs"
+        },
+        {
+          "node": "execute",
+          "rows": 30
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 767,
+          "completion_tokens": 22,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 789,
+          "finish_reason": "stop",
+          "latency_seconds": 1.1471736660023453
+        }
+      ],
+      "latency_seconds": 1.155605708998337
+    },
+    {
+      "id": 766,
+      "db_id": "world_1",
+      "sql": "SELECT SUM(country.Population) FROM country WHERE NOT country.Code IN (SELECT countrylanguage.CountryCode FROM countrylanguage WHERE countrylanguage.Language = 'English')",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT SUM(country.Population) FROM country WHERE country.Code NOT IN (SELECT countrylanguage.CountryCode FROM countrylanguage WHERE countrylanguage.Language = 'English');"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 363,
+          "completion_tokens": 34,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 397,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7852679999996326
+        }
+      ],
+      "latency_seconds": 0.7969593329980853
+    },
+    {
+      "id": 484,
+      "db_id": "wta_1",
+      "sql": "SELECT winner_name, winner_rank FROM matches ORDER BY winner_age ASC LIMIT 3",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT winner_name, winner_rank\nFROM matches\nORDER BY winner_age ASC\nLIMIT 3;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 479,
+          "completion_tokens": 22,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 501,
+          "finish_reason": "stop",
+          "latency_seconds": 0.854663709000306
+        }
+      ],
+      "latency_seconds": 0.8609864589998324
+    },
+    {
+      "id": 502,
+      "db_id": "battle_death",
+      "sql": "SELECT COUNT(DISTINCT result) FROM battle",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(DISTINCT result) FROM battle;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 292,
+          "completion_tokens": 10,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 302,
+          "finish_reason": "stop",
+          "latency_seconds": 0.857450333001907
+        }
+      ],
+      "latency_seconds": 0.8620372499972291
+    },
+    {
+      "id": 1024,
+      "db_id": "singer",
+      "sql": "SELECT singer.Name, SUM(song.Sales) AS Total_Sales FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID GROUP BY singer.Singer_ID, singer.Name",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 6,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT singer.Name, SUM(song.Sales) AS Total_Sales\nFROM singer\nJOIN song ON singer.Singer_ID = song.Singer_ID\nGROUP BY singer.Singer_ID, singer.Name;"
+        },
+        {
+          "node": "execute",
+          "rows": 6
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 216,
+          "completion_tokens": 42,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 258,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0774704159994144
+        }
+      ],
+      "latency_seconds": 1.0825475420024304
+    },
+    {
+      "id": 862,
+      "db_id": "network_1",
+      "sql": "SELECT COUNT(*) FROM Highschooler",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM Highschooler;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 270,
+          "completion_tokens": 8,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 278,
+          "finish_reason": "stop",
+          "latency_seconds": 0.80565529100204
+        }
+      ],
+      "latency_seconds": 0.8182034999990719
+    },
+    {
+      "id": 889,
+      "db_id": "network_1",
+      "sql": "SELECT h.name FROM Highschooler AS h JOIN Friend AS f ON h.ID = f.student_id GROUP BY h.ID, h.name HAVING COUNT(f.friend_id) >= 3",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT h.name\nFROM Highschooler h\nJOIN Friend f ON h.ID = f.student_id\nGROUP BY h.ID, h.name\nHAVING COUNT(f.friend_id) >= 3;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 278,
+          "completion_tokens": 44,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 322,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9224680830011494
+        }
+      ],
+      "latency_seconds": 0.9407135410001501
+    },
+    {
+      "id": 441,
+      "db_id": "wta_1",
+      "sql": "SELECT COUNT(DISTINCT country_code) FROM players",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(DISTINCT country_code) FROM players;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 475,
+          "completion_tokens": 11,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 486,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8343934160002391
+        }
+      ],
+      "latency_seconds": 0.8526705830008723
+    },
+    {
+      "id": 531,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT department_description FROM Departments WHERE department_name LIKE '%the computer%'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT department_description FROM Departments WHERE department_name LIKE '%the computer%'"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 1000,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1014,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6549272920019575
+        }
+      ],
+      "latency_seconds": 0.6696334580010443
+    },
+    {
+      "id": 202,
+      "db_id": "flight_2",
+      "sql": "SELECT AirportName FROM airports WHERE City = 'Aberdeen'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT AirportName FROM airports WHERE City = 'Aberdeen';"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 269,
+          "completion_tokens": 12,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 281,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6769012500008103
+        }
+      ],
+      "latency_seconds": 0.6833237499995448
+    },
+    {
+      "id": 30,
+      "db_id": "concert_singer",
+      "sql": "SELECT Country FROM singer WHERE Age > 40 INTERSECT SELECT Country FROM singer WHERE Age < 30",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Country FROM singer WHERE Age > 40 INTERSECT SELECT Country FROM singer WHERE Age < 30"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 364,
+          "completion_tokens": 21,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 385,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9888561249972554
+        }
+      ],
+      "latency_seconds": 0.9993665000001783
+    },
+    {
+      "id": 958,
+      "db_id": "dog_kennels",
+      "sql": "SELECT DISTINCT Dogs.date_arrived, Dogs.date_departed FROM Dogs JOIN Treatments ON Dogs.dog_id = Treatments.dog_id",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 9,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT Dogs.date_arrived, Dogs.date_departed FROM Dogs JOIN Treatments ON Dogs.dog_id = Treatments.dog_id"
+        },
+        {
+          "node": "execute",
+          "rows": 9
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 769,
+          "completion_tokens": 27,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 796,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9497516250012268
+        }
+      ],
+      "latency_seconds": 0.9547901250007271
+    },
+    {
+      "id": 734,
+      "db_id": "world_1",
+      "sql": "SELECT COUNT(DISTINCT GovernmentForm) FROM country WHERE Continent = 'Africa'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(DISTINCT GovernmentForm) FROM country WHERE Continent = 'Africa';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 355,
+          "completion_tokens": 16,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 371,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9843143750003946
+        }
+      ],
+      "latency_seconds": 0.9907200419984292
+    },
+    {
+      "id": 508,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT line_1, line_2 FROM Addresses",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 15,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT line_1, line_2 FROM Addresses"
+        },
+        {
+          "node": "execute",
+          "rows": 15
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 996,
+          "completion_tokens": 11,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1007,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0341985000013665
+        }
+      ],
+      "latency_seconds": 1.0394490420003422
+    },
+    {
+      "id": 585,
+      "db_id": "tvshow",
+      "sql": "SELECT Title FROM Cartoon ORDER BY Title ASC",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 12,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Title FROM Cartoon ORDER BY Title ASC;"
+        },
+        {
+          "node": "execute",
+          "rows": 12
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 339,
+          "completion_tokens": 10,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 349,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6808336249996501
+        }
+      ],
+      "latency_seconds": 0.6919901660003234
+    },
+    {
+      "id": 693,
+      "db_id": "voter_1",
+      "sql": "SELECT DISTINCT state, created FROM VOTES",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 4,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT state, created FROM VOTES;"
+        },
+        {
+          "node": "execute",
+          "rows": 4
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 255,
+          "completion_tokens": 11,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 266,
+          "finish_reason": "stop",
+          "latency_seconds": 1.3128258329998062
+        }
+      ],
+      "latency_seconds": 1.3179820420009491
+    },
+    {
+      "id": 845,
+      "db_id": "orchestra",
+      "sql": "SELECT c.Name FROM conductor AS c JOIN orchestra AS o ON c.Conductor_ID = o.Conductor_ID GROUP BY c.Conductor_ID, c.Name ORDER BY COUNT(o.Orchestra_ID) DESC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT c.Name\nFROM conductor c\nJOIN orchestra o ON c.Conductor_ID = o.Conductor_ID\nGROUP BY c.Conductor_ID, c.Name\nORDER BY COUNT(o.Orchestra_ID) DESC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 381,
+          "completion_tokens": 50,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 431,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9463550410000607
+        }
+      ],
+      "latency_seconds": 0.9551542909975979
+    },
+    {
+      "id": 204,
+      "db_id": "flight_2",
+      "sql": "SELECT COUNT(*) FROM flights WHERE SourceAirport = 'APG'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM flights WHERE SourceAirport = 'APG';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 272,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 286,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6514765840001928
+        }
+      ],
+      "latency_seconds": 0.6622674579994055
+    },
+    {
+      "id": 1007,
+      "db_id": "singer",
+      "sql": "SELECT Name FROM singer WHERE Citizenship <> 'French'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 8,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM singer WHERE Citizenship <> 'French';"
+        },
+        {
+          "node": "execute",
+          "rows": 8
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 216,
+          "completion_tokens": 10,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 226,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0017252920006285
+        }
+      ],
+      "latency_seconds": 1.0475002079983824
+    },
+    {
+      "id": 750,
+      "db_id": "world_1",
+      "sql": "SELECT COUNT(DISTINCT country.Continent) FROM country JOIN countrylanguage ON country.Code = countrylanguage.CountryCode WHERE countrylanguage.Language = 'Chinese'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(DISTINCT country.Continent) FROM country JOIN countrylanguage ON country.Code = countrylanguage.CountryCode WHERE countrylanguage.Language = 'Chinese';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 358,
+          "completion_tokens": 32,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 390,
+          "finish_reason": "stop",
+          "latency_seconds": 0.920063041998219
+        }
+      ],
+      "latency_seconds": 0.9348028329986846
+    },
+    {
+      "id": 22,
+      "db_id": "concert_singer",
+      "sql": "SELECT s.Name, COUNT(c.concert_ID) AS concert_count FROM stadium AS s LEFT JOIN concert AS c ON s.Stadium_ID = c.Stadium_ID GROUP BY s.Stadium_ID, s.Name",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 9,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.Name, COUNT(c.concert_ID) AS concert_count\nFROM stadium s\nLEFT JOIN concert c ON s.Stadium_ID = c.Stadium_ID\nGROUP BY s.Stadium_ID, s.Name;"
+        },
+        {
+          "node": "execute",
+          "rows": 9
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 359,
+          "completion_tokens": 43,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 402,
+          "finish_reason": "stop",
+          "latency_seconds": 1.013081749999401
+        }
+      ],
+      "latency_seconds": 1.0245758339988242
+    },
+    {
+      "id": 136,
+      "db_id": "car_1",
+      "sql": "SELECT AVG(CAST(cars_data.Horsepower AS REAL)) FROM cars_data WHERE cars_data.Year < 1980",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT AVG(CAST(cars_data.Horsepower AS REAL)) FROM cars_data WHERE cars_data.Year < 1980;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 415,
+          "completion_tokens": 27,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 442,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7750149170024088
+        }
+      ],
+      "latency_seconds": 0.7811925840032927
+    },
+    {
+      "id": 536,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT s.first_name, s.middle_name, s.last_name FROM Students AS s JOIN Student_Enrolment AS se ON s.student_id = se.student_id JOIN Degree_Programs AS dp ON se.degree_program_id = dp.degree_program_id WHERE dp.degree_summary_name = 'Bachelors'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT s.first_name, s.middle_name, s.last_name\nFROM Students s\nJOIN Student_Enrolment se ON s.student_id = se.student_id\nJOIN Degree_Programs dp ON se.degree_program_id = dp.degree_program_id\nWHERE dp.degree_summary_name = 'Bachelors'"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 1004,
+          "completion_tokens": 68,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1072,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7268426660011755
+        }
+      ],
+      "latency_seconds": 0.7375049580004998
+    },
+    {
+      "id": 120,
+      "db_id": "car_1",
+      "sql": "SELECT MIN(Weight) FROM cars_data WHERE Cylinders = 8 AND Year = 1974",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT MIN(Weight) FROM cars_data WHERE Cylinders = 8 AND Year = 1974;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 419,
+          "completion_tokens": 21,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 440,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6973445830008131
+        }
+      ],
+      "latency_seconds": 0.7077203749977343
+    },
+    {
+      "id": 313,
+      "db_id": "cre_Doc_Template_Mgt",
+      "sql": "SELECT T.Template_ID FROM Templates AS T JOIN Documents AS D ON T.Template_ID = D.Template_ID GROUP BY T.Template_ID HAVING COUNT(D.Document_ID) > 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT T.Template_ID\nFROM Templates T\nJOIN Documents D ON T.Template_ID = D.Template_ID\nGROUP BY T.Template_ID\nHAVING COUNT(D.Document_ID) > 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 377,
+          "completion_tokens": 45,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 422,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0113867500003835
+        }
+      ],
+      "latency_seconds": 1.0248514999984764
+    },
+    {
+      "id": 414,
+      "db_id": "museum_visit",
+      "sql": "SELECT Name, Level_of_membership FROM visitor WHERE Level_of_membership > 4 ORDER BY Age DESC",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name, Level_of_membership FROM visitor WHERE Level_of_membership > 4 ORDER BY Age DESC;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 282,
+          "completion_tokens": 24,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 306,
+          "finish_reason": "stop",
+          "latency_seconds": 1.158252375000302
+        }
+      ],
+      "latency_seconds": 1.166844667000987
+    },
+    {
+      "id": 917,
+      "db_id": "network_1",
+      "sql": "SELECT MIN(grade) FROM Highschooler WHERE NOT ID IN (SELECT student_id FROM Friend)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT MIN(grade) FROM Highschooler WHERE ID NOT IN (SELECT student_id FROM Friend)"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 276,
+          "completion_tokens": 20,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 296,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8761046670006181
+        }
+      ],
+      "latency_seconds": 0.8825772080017487
+    },
+    {
+      "id": 205,
+      "db_id": "flight_2",
+      "sql": "SELECT COUNT(*) FROM flights WHERE DestAirport = 'ATO'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM flights WHERE DestAirport = 'ATO';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 268,
+          "completion_tokens": 13,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 281,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7907916660005867
+        }
+      ],
+      "latency_seconds": 0.7989376250006899
+    },
+    {
+      "id": 38,
+      "db_id": "concert_singer",
+      "sql": "SELECT DISTINCT singer.Name FROM singer JOIN singer_in_concert ON singer.Singer_ID = singer_in_concert.Singer_ID JOIN concert ON singer_in_concert.concert_ID = concert.concert_ID WHERE concert.Year = '2014'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 5,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT singer.Name FROM singer JOIN singer_in_concert ON singer.Singer_ID = singer_in_concert.Singer_ID JOIN concert ON singer_in_concert.concert_ID = concert.concert_ID WHERE concert.Year = '2014'"
+        },
+        {
+          "node": "execute",
+          "rows": 5
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 363,
+          "completion_tokens": 49,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 412,
+          "finish_reason": "stop",
+          "latency_seconds": 1.026164457998675
+        }
+      ],
+      "latency_seconds": 1.0334323330025654
+    },
+    {
+      "id": 915,
+      "db_id": "network_1",
+      "sql": "SELECT AVG(h.grade) FROM Highschooler AS h WHERE EXISTS(SELECT 1 FROM Friend AS f WHERE f.student_id = h.ID)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT AVG(h.grade) FROM Highschooler h WHERE EXISTS (SELECT 1 FROM Friend f WHERE f.student_id = h.ID)"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 273,
+          "completion_tokens": 30,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 303,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8988974170024449
+        }
+      ],
+      "latency_seconds": 0.9251622080009838
+    },
+    {
+      "id": 8,
+      "db_id": "concert_singer",
+      "sql": "SELECT DISTINCT Country FROM singer WHERE Age > 20",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT Country FROM singer WHERE Age > 20;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 360,
+          "completion_tokens": 12,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 372,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6523704999999609
+        }
+      ],
+      "latency_seconds": 0.6637020829984976
+    },
+    {
+      "id": 383,
+      "db_id": "course_teach",
+      "sql": "SELECT Name FROM teacher ORDER BY Age ASC",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 7,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM teacher ORDER BY Age ASC;"
+        },
+        {
+          "node": "execute",
+          "rows": 7
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 246,
+          "completion_tokens": 9,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 255,
+          "finish_reason": "stop",
+          "latency_seconds": 0.87203566700191
+        }
+      ],
+      "latency_seconds": 0.8789555409966852
+    },
+    {
+      "id": 382,
+      "db_id": "course_teach",
+      "sql": "SELECT COUNT(*) FROM teacher",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM teacher;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 243,
+          "completion_tokens": 6,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 249,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8647987090007518
+        }
+      ],
+      "latency_seconds": 0.8768310410014237
+    },
+    {
+      "id": 720,
+      "db_id": "world_1",
+      "sql": "SELECT Name FROM country WHERE Continent = 'Asia' ORDER BY LifeExpectancy ASC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM country WHERE Continent = 'Asia' ORDER BY LifeExpectancy ASC LIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 361,
+          "completion_tokens": 21,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 382,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8617281250008091
+        }
+      ],
+      "latency_seconds": 0.8684974999996484
+    },
+    {
+      "id": 457,
+      "db_id": "wta_1",
+      "sql": "SELECT first_name, last_name FROM players WHERE hand IN ('L', 'left') ORDER BY birth_date",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 487,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT first_name, last_name FROM players WHERE hand IN ('L', 'left') ORDER BY birth_date;"
+        },
+        {
+          "node": "execute",
+          "rows": 487
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 486,
+          "completion_tokens": 22,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 508,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6081803750021209
+        }
+      ],
+      "latency_seconds": 0.6173226669998257
+    },
+    {
+      "id": 208,
+      "db_id": "flight_2",
+      "sql": "SELECT COUNT(*) FROM flights AS T1 JOIN airports AS T2 ON T1.SourceAirport = T2.AirportCode WHERE T2.City = 'Aberdeen'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM flights AS T1 JOIN airports AS T2 ON T1.SourceAirport = T2.AirportCode WHERE T2.City = 'Aberdeen';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 269,
+          "completion_tokens": 37,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 306,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6507580840006995
+        }
+      ],
+      "latency_seconds": 0.6570604580010695
+    },
+    {
+      "id": 790,
+      "db_id": "world_1",
+      "sql": "SELECT Population, Name, HeadOfState FROM country ORDER BY SurfaceArea DESC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Population, Name, HeadOfState FROM country ORDER BY SurfaceArea DESC LIMIT 1"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 362,
+          "completion_tokens": 19,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 381,
+          "finish_reason": "stop",
+          "latency_seconds": 0.914231540999026
+        }
+      ],
+      "latency_seconds": 0.9223806250010966
+    },
+    {
+      "id": 118,
+      "db_id": "car_1",
+      "sql": "SELECT AVG(CAST(MPG AS REAL)) FROM cars_data WHERE Cylinders = 4",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT AVG(CAST(MPG AS REAL)) FROM cars_data WHERE Cylinders = 4;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 416,
+          "completion_tokens": 21,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 437,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8926873339987651
+        }
+      ],
+      "latency_seconds": 0.9061451670022507
+    },
+    {
+      "id": 783,
+      "db_id": "world_1",
+      "sql": "SELECT Code FROM country WHERE NOT Code IN (SELECT CountryCode FROM countrylanguage WHERE Language = 'English') AND GovernmentForm NOT LIKE '%Republic%'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 49,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Code FROM country WHERE Code NOT IN (SELECT CountryCode FROM countrylanguage WHERE Language = 'English') AND GovernmentForm NOT LIKE '%Republic%';"
+        },
+        {
+          "node": "execute",
+          "rows": 49
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 365,
+          "completion_tokens": 30,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 395,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9118712089984911
+        }
+      ],
+      "latency_seconds": 0.9231251669989433
+    },
+    {
+      "id": 603,
+      "db_id": "tvshow",
+      "sql": "SELECT COUNT(*) FROM TV_Channel WHERE Language = 'English'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM TV_Channel WHERE Language = 'English';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 337,
+          "completion_tokens": 13,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 350,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9264244159967348
+        }
+      ],
+      "latency_seconds": 0.9309502079995582
+    },
+    {
+      "id": 78,
+      "db_id": "pets_1",
+      "sql": "SELECT Pets.PetID FROM Student JOIN Has_Pet ON Student.StuID = Has_Pet.StuID JOIN Pets ON Has_Pet.PetID = Pets.PetID WHERE Student.LName = 'Smith'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Pets.PetID FROM Student JOIN Has_Pet ON Student.StuID = Has_Pet.StuID JOIN Pets ON Has_Pet.PetID = Pets.PetID WHERE Student.LName = 'Smith'"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 284,
+          "completion_tokens": 45,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 329,
+          "finish_reason": "stop",
+          "latency_seconds": 1.116389208000328
+        }
+      ],
+      "latency_seconds": 1.1219177919992944
+    },
+    {
+      "id": 636,
+      "db_id": "tvshow",
+      "sql": "SELECT DISTINCT TV_Channel.Country FROM TV_Channel WHERE NOT TV_Channel.id IN (SELECT Cartoon.Channel FROM Cartoon WHERE Cartoon.Written_by = 'Todd Casey')",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT TV_Channel.Country\nFROM TV_Channel\nWHERE TV_Channel.id NOT IN (\n    SELECT Cartoon.Channel\n    FROM Cartoon\n    WHERE Cartoon.Written_by = 'Todd Casey'\n)"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 343,
+          "completion_tokens": 48,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 391,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8213664170034463
+        }
+      ],
+      "latency_seconds": 0.8276192919984169
+    },
+    {
+      "id": 237,
+      "db_id": "flight_2",
+      "sql": "SELECT a.Airline FROM airlines AS a JOIN flights AS f1 ON a.uid = f1.Airline JOIN flights AS f2 ON a.uid = f2.Airline WHERE f1.SourceAirport = 'APG' AND f2.SourceAirport = 'CVO'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT a.Airline FROM airlines a JOIN flights f1 ON a.uid = f1.Airline JOIN flights f2 ON a.uid = f2.Airline WHERE f1.SourceAirport = 'APG' AND f2.SourceAirport = 'CVO'"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 279,
+          "completion_tokens": 60,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 339,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0546383749970119
+        }
+      ],
+      "latency_seconds": 1.0593617919985263
+    },
+    {
+      "id": 855,
+      "db_id": "orchestra",
+      "sql": "SELECT o.Orchestra FROM orchestra AS o WHERE NOT EXISTS(SELECT 1 FROM performance AS p WHERE p.Orchestra_ID = o.Orchestra_ID)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT o.Orchestra\nFROM orchestra o\nWHERE NOT EXISTS (\n    SELECT 1\n    FROM performance p\n    WHERE p.Orchestra_ID = o.Orchestra_ID\n);"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 378,
+          "completion_tokens": 42,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 420,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8003771670009883
+        }
+      ],
+      "latency_seconds": 0.807657500001369
+    },
+    {
+      "id": 154,
+      "db_id": "car_1",
+      "sql": "SELECT DISTINCT Year FROM cars_data WHERE Weight < 4000 AND Year IN (SELECT Year FROM cars_data WHERE Weight > 3000) ORDER BY Year",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 13,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT DISTINCT Year FROM cars_data WHERE Weight < 4000 AND Year IN (SELECT Year FROM cars_data WHERE Weight > 3000) ORDER BY Year;"
+        },
+        {
+          "node": "execute",
+          "rows": 13
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 430,
+          "completion_tokens": 33,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 463,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6224404999993567
+        }
+      ],
+      "latency_seconds": 0.6301916660013376
+    },
+    {
+      "id": 193,
+      "db_id": "flight_2",
+      "sql": "SELECT Airline FROM airlines WHERE Abbreviation = 'UAL'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Airline FROM airlines WHERE Abbreviation = 'UAL';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 268,
+          "completion_tokens": 13,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 281,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7499666250005248
+        }
+      ],
+      "latency_seconds": 0.7614644999994198
+    },
+    {
+      "id": 518,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT COUNT(DISTINCT department_id) FROM Degree_Programs",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(DISTINCT department_id) FROM Degree_Programs;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 992,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1006,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7359878329989442
+        }
+      ],
+      "latency_seconds": 0.7461800420023792
+    },
+    {
+      "id": 626,
+      "db_id": "tvshow",
+      "sql": "SELECT TV_series.Episode FROM TV_series JOIN TV_Channel ON TV_series.Channel = TV_Channel.id WHERE TV_Channel.series_name = 'Sky Radio'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT TV_series.Episode FROM TV_series JOIN TV_Channel ON TV_series.Channel = TV_Channel.id WHERE TV_Channel.series_name = 'Sky Radio'"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 343,
+          "completion_tokens": 38,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 381,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9244631670007948
+        }
+      ],
+      "latency_seconds": 0.9349910419987282
+    },
+    {
+      "id": 965,
+      "db_id": "dog_kennels",
+      "sql": "SELECT date_arrived, date_departed FROM Dogs",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 15,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT date_arrived, date_departed FROM Dogs;"
+        },
+        {
+          "node": "execute",
+          "rows": 15
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 763,
+          "completion_tokens": 12,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 775,
+          "finish_reason": "stop",
+          "latency_seconds": 1.57643358399946
+        }
+      ],
+      "latency_seconds": 1.5836458329977177
+    },
+    {
+      "id": 937,
+      "db_id": "dog_kennels",
+      "sql": "SELECT o.owner_id, o.last_name FROM Owners AS o JOIN Dogs AS d ON d.owner_id = o.owner_id JOIN Treatments AS t ON t.dog_id = d.dog_id GROUP BY o.owner_id, o.last_name ORDER BY SUM(t.cost_of_treatment) DESC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT o.owner_id, o.last_name\nFROM Owners o\nJOIN Dogs d ON d.owner_id = o.owner_id\nJOIN Treatments t ON t.dog_id = d.dog_id\nGROUP BY o.owner_id, o.last_name\nORDER BY SUM(t.cost_of_treatment) DESC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 773,
+          "completion_tokens": 72,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 845,
+          "finish_reason": "stop",
+          "latency_seconds": 1.2020829169996432
+        }
+      ],
+      "latency_seconds": 1.2134423749994312
+    },
+    {
+      "id": 701,
+      "db_id": "voter_1",
+      "sql": "SELECT contestant_name FROM CONTESTANTS WHERE contestant_name LIKE '%Al%'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 4,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT contestant_name FROM CONTESTANTS WHERE contestant_name LIKE '%Al%';"
+        },
+        {
+          "node": "execute",
+          "rows": 4
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 259,
+          "completion_tokens": 17,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 276,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0509797090016946
+        }
+      ],
+      "latency_seconds": 1.0569966670009308
+    },
+    {
+      "id": 367,
+      "db_id": "cre_Doc_Template_Mgt",
+      "sql": "SELECT d.Document_ID, COUNT(p.Paragraph_ID) AS paragraph_count FROM Documents AS d LEFT JOIN Paragraphs AS p ON d.Document_ID = p.Document_ID GROUP BY d.Document_ID ORDER BY d.Document_ID",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 15,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT d.Document_ID, COUNT(p.Paragraph_ID) AS paragraph_count\nFROM Documents d\nLEFT JOIN Paragraphs p ON d.Document_ID = p.Document_ID\nGROUP BY d.Document_ID\nORDER BY d.Document_ID;"
+        },
+        {
+          "node": "execute",
+          "rows": 15
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 381,
+          "completion_tokens": 50,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 431,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0086293329986802
+        }
+      ],
+      "latency_seconds": 1.013368708001508
+    },
+    {
+      "id": 582,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT section_description FROM Sections WHERE section_name = 'h'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT section_description FROM Sections WHERE section_name = 'h'"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 995,
+          "completion_tokens": 12,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1007,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8068426249992626
+        }
+      ],
+      "latency_seconds": 0.8138012499985052
+    },
+    {
+      "id": 992,
+      "db_id": "dog_kennels",
+      "sql": "SELECT MAX(charge_amount) AS max_charge_amount FROM Charges",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT MAX(charge_amount) AS max_charge_amount FROM Charges;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 760,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 774,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8867356250011653
+        }
+      ],
+      "latency_seconds": 0.8909860420026234
+    },
+    {
+      "id": 222,
+      "db_id": "flight_2",
+      "sql": "SELECT a.City FROM airports AS a JOIN flights AS f ON f.DestAirport = a.AirportCode GROUP BY a.City ORDER BY COUNT(*) DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT a.City\nFROM airports AS a\nJOIN flights AS f ON f.DestAirport = a.AirportCode\nGROUP BY a.City\nORDER BY COUNT(*) DESC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 269,
+          "completion_tokens": 45,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 314,
+          "finish_reason": "stop",
+          "latency_seconds": 0.8777005830015696
+        }
+      ],
+      "latency_seconds": 0.8828196670001489
+    },
+    {
+      "id": 419,
+      "db_id": "museum_visit",
+      "sql": "SELECT v.ID, v.Name, v.Age FROM visitor AS v JOIN visit AS vi ON v.ID = vi.visitor_ID GROUP BY v.ID, v.Name, v.Age HAVING COUNT(*) > 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 3,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT v.ID, v.Name, v.Age\nFROM visitor v\nJOIN visit vi ON v.ID = vi.visitor_ID\nGROUP BY v.ID, v.Name, v.Age\nHAVING COUNT(*) > 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 3
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 271,
+          "completion_tokens": 50,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 321,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7723004170002241
+        }
+      ],
+      "latency_seconds": 0.7805684580016532
+    },
+    {
+      "id": 521,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT COUNT(*) FROM Degree_Programs AS dp JOIN Departments AS d ON dp.department_id = d.department_id WHERE d.department_name = 'engineering'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM Degree_Programs dp JOIN Departments d ON dp.department_id = d.department_id WHERE d.department_name = 'engineering';"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 994,
+          "completion_tokens": 31,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1025,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0810020419994544
+        }
+      ],
+      "latency_seconds": 1.0861368750011025
+    },
+    {
+      "id": 409,
+      "db_id": "course_teach",
+      "sql": "SELECT t.Name FROM teacher AS t WHERE NOT EXISTS(SELECT 1 FROM course_arrange AS ca WHERE ca.Teacher_ID = t.Teacher_ID)",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT t.Name FROM teacher AS t WHERE NOT EXISTS (SELECT 1 FROM course_arrange AS ca WHERE ca.Teacher_ID = t.Teacher_ID)"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 249,
+          "completion_tokens": 33,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 282,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7979182500021125
+        }
+      ],
+      "latency_seconds": 0.810552374998224
+    },
+    {
+      "id": 180,
+      "db_id": "flight_2",
+      "sql": "SELECT Country FROM airlines WHERE Airline = 'Jetblue Airways'",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 0,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Country FROM airlines WHERE Airline = 'Jetblue Airways';"
+        },
+        {
+          "node": "execute",
+          "rows": 0
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 269,
+          "completion_tokens": 13,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 282,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7728790000001027
+        }
+      ],
+      "latency_seconds": 0.795604082999489
+    },
+    {
+      "id": 611,
+      "db_id": "tvshow",
+      "sql": "SELECT Cartoon.Title FROM Cartoon JOIN TV_Channel ON Cartoon.Channel = TV_Channel.id WHERE TV_Channel.series_name = 'Sky Radio'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Cartoon.Title FROM Cartoon JOIN TV_Channel ON Cartoon.Channel = TV_Channel.id WHERE TV_Channel.series_name = 'Sky Radio'"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 350,
+          "completion_tokens": 33,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 383,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9069586670011631
+        }
+      ],
+      "latency_seconds": 0.9129610839991074
+    },
+    {
+      "id": 466,
+      "db_id": "wta_1",
+      "sql": "SELECT winner_name FROM matches WHERE tourney_name = 'Australian Open' ORDER BY winner_rank_points DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT winner_name\nFROM matches\nWHERE tourney_name = 'Australian Open'\nORDER BY winner_rank_points DESC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 484,
+          "completion_tokens": 29,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 513,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6140910419999273
+        }
+      ],
+      "latency_seconds": 0.6302305419994809
+    },
+    {
+      "id": 456,
+      "db_id": "wta_1",
+      "sql": "SELECT first_name || ' ' || last_name AS full_name FROM players ORDER BY birth_date",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 20662,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT first_name || ' ' || last_name AS full_name FROM players ORDER BY birth_date;"
+        },
+        {
+          "node": "execute",
+          "rows": 20662
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 478,
+          "completion_tokens": 19,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 497,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7196644579998974
+        }
+      ],
+      "latency_seconds": 0.7634402089970536
+    },
+    {
+      "id": 192,
+      "db_id": "flight_2",
+      "sql": "SELECT COUNT(*) FROM flights",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM flights;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 266,
+          "completion_tokens": 6,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 272,
+          "finish_reason": "stop",
+          "latency_seconds": 0.886656792001304
+        }
+      ],
+      "latency_seconds": 0.8946753329983039
+    },
+    {
+      "id": 828,
+      "db_id": "orchestra",
+      "sql": "SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 12,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC;"
+        },
+        {
+          "node": "execute",
+          "rows": 12
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 385,
+          "completion_tokens": 14,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 399,
+          "finish_reason": "stop",
+          "latency_seconds": 0.846065458998055
+        }
+      ],
+      "latency_seconds": 0.850953290999314
+    },
+    {
+      "id": 564,
+      "db_id": "student_transcripts_tracking",
+      "sql": "SELECT AVG(transcript_date) FROM Transcripts",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT AVG(transcript_date) FROM Transcripts;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 992,
+          "completion_tokens": 12,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 1004,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7831437919994642
+        }
+      ],
+      "latency_seconds": 0.7887450839989469
+    },
+    {
+      "id": 262,
+      "db_id": "employee_hire_evaluation",
+      "sql": "SELECT Name FROM employee ORDER BY Age ASC",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 10,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM employee ORDER BY Age ASC;"
+        },
+        {
+          "node": "execute",
+          "rows": 10
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 319,
+          "completion_tokens": 9,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 328,
+          "finish_reason": "stop",
+          "latency_seconds": 0.5487669999965874
+        }
+      ],
+      "latency_seconds": 0.5578114999989339
+    },
+    {
+      "id": 667,
+      "db_id": "poker_player",
+      "sql": "SELECT T1.Money_Rank FROM poker_player AS T1 JOIN people AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Height DESC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT T1.Money_Rank FROM poker_player AS T1 JOIN people AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Height DESC LIMIT 1"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 223,
+          "completion_tokens": 43,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 266,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6949640829989221
+        }
+      ],
+      "latency_seconds": 0.7058777500024007
+    },
+    {
+      "id": 389,
+      "db_id": "course_teach",
+      "sql": "SELECT Name FROM teacher WHERE Age = '32' OR Age = '33'",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 2,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Name FROM teacher WHERE Age = '32' OR Age = '33'"
+        },
+        {
+          "node": "execute",
+          "rows": 2
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 248,
+          "completion_tokens": 16,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 264,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6990246669993212
+        }
+      ],
+      "latency_seconds": 0.7029195409995737
+    },
+    {
+      "id": 480,
+      "db_id": "wta_1",
+      "sql": "SELECT ranking_date, SUM(tours) AS total_tours FROM rankings GROUP BY ranking_date ORDER BY ranking_date",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1504,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT ranking_date, SUM(tours) AS total_tours\nFROM rankings\nGROUP BY ranking_date\nORDER BY ranking_date;"
+        },
+        {
+          "node": "execute",
+          "rows": 1504
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 475,
+          "completion_tokens": 26,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 501,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0612191660002281
+        }
+      ],
+      "latency_seconds": 1.229110917000071
+    },
+    {
+      "id": 858,
+      "db_id": "orchestra",
+      "sql": "SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format IN ('CD', 'DVD')",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format IN ('CD', 'DVD');"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 385,
+          "completion_tokens": 18,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 403,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9966736249989481
+        }
+      ],
+      "latency_seconds": 1.007752208999591
+    },
+    {
+      "id": 821,
+      "db_id": "world_1",
+      "sql": "SELECT CountryCode FROM countrylanguage WHERE Language = 'Spanish' ORDER BY Percentage DESC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT CountryCode FROM countrylanguage WHERE Language = 'Spanish' ORDER BY Percentage DESC LIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 360,
+          "completion_tokens": 21,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 381,
+          "finish_reason": "stop",
+          "latency_seconds": 1.0426413339991996
+        }
+      ],
+      "latency_seconds": 1.0527722499973606
+    },
+    {
+      "id": 327,
+      "db_id": "cre_Doc_Template_Mgt",
+      "sql": "SELECT Version_Number, Template_Type_Code FROM Templates WHERE Version_Number > 5",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 9,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Version_Number, Template_Type_Code FROM Templates WHERE Version_Number > 5;"
+        },
+        {
+          "node": "execute",
+          "rows": 9
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 383,
+          "completion_tokens": 20,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 403,
+          "finish_reason": "stop",
+          "latency_seconds": 0.6997191670016036
+        }
+      ],
+      "latency_seconds": 0.7050789169989002
+    },
+    {
+      "id": 988,
+      "db_id": "dog_kennels",
+      "sql": "SELECT age FROM Dogs ORDER BY date_of_birth ASC LIMIT 1",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT age FROM Dogs ORDER BY date_of_birth ASC LIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 759,
+          "completion_tokens": 16,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 775,
+          "finish_reason": "stop",
+          "latency_seconds": 1.058876416998828
+        }
+      ],
+      "latency_seconds": 1.0680644999993092
+    },
+    {
+      "id": 939,
+      "db_id": "dog_kennels",
+      "sql": "SELECT t.treatment_type_description FROM Treatment_Types AS t JOIN Treatments AS tr ON tr.treatment_type_code = t.treatment_type_code GROUP BY t.treatment_type_code, t.treatment_type_description ORDER BY SUM(tr.cost_of_treatment) ASC LIMIT 1",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT t.treatment_type_description\nFROM Treatment_Types t\nJOIN Treatments tr ON tr.treatment_type_code = t.treatment_type_code\nGROUP BY t.treatment_type_code, t.treatment_type_description\nORDER BY SUM(tr.cost_of_treatment) ASC\nLIMIT 1;"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 765,
+          "completion_tokens": 62,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 827,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7616259589995025
+        }
+      ],
+      "latency_seconds": 0.7870179579986143
+    },
+    {
+      "id": 1029,
+      "db_id": "singer",
+      "sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955",
+      "correct": true,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 1,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955"
+        },
+        {
+          "node": "execute",
+          "rows": 1
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 227,
+          "completion_tokens": 27,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 254,
+          "finish_reason": "stop",
+          "latency_seconds": 0.7523795419983799
+        }
+      ],
+      "latency_seconds": 0.7629338330007158
+    },
+    {
+      "id": 242,
+      "db_id": "flight_2",
+      "sql": "SELECT a.Airline, a.Abbreviation, a.Country FROM airlines AS a JOIN flights AS f ON f.Airline = a.uid GROUP BY a.uid, a.Airline, a.Abbreviation, a.Country HAVING COUNT(*) >= 10",
+      "correct": false,
+      "executable": true,
+      "error": null,
+      "gold_error": null,
+      "row_count": 12,
+      "trace": [
+        {
+          "node": "generate",
+          "sql": "SELECT a.Airline, a.Abbreviation, a.Country\nFROM airlines a\nJOIN flights f ON f.Airline = a.uid\nGROUP BY a.uid, a.Airline, a.Abbreviation, a.Country\nHAVING COUNT(*) >= 10;"
+        },
+        {
+          "node": "execute",
+          "rows": 12
+        }
+      ],
+      "calls": [
+        {
+          "model_requested": "deepseek-flash",
+          "status": "ok",
+          "prompt_tokens": 269,
+          "completion_tokens": 62,
+          "http_status": 200,
+          "model_returned": "deepseek-flash",
+          "total_tokens": 331,
+          "finish_reason": "stop",
+          "latency_seconds": 0.9934916670026723
+        }
+      ],
+      "latency_seconds": 0.9968278750020545
+    }
+  ],
+  "metrics": {
+    "n": 150,
+    "correct": 111,
+    "executable": 150,
+    "execution_accuracy": 0.74,
+    "executable_rate": 1.0,
+    "average_calls": 1.0,
+    "average_latency_seconds": 0.9023264569531118,
+    "total_calls": 150,
+    "total_tokens": 71892,
+    "reported_tokens": 71892,
+    "usage_complete": true,
+    "gold_errors": 0
+  },
+  "wall_seconds": 34.387545749999845
+}
