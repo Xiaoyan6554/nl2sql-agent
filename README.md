@@ -46,7 +46,7 @@ uv run streamlit run src/nl2sql/demo.py --server.address 127.0.0.1 --server.port
 依赖版本由 `uv.lock` 固定，开发环境使用 Python 3.12。
 
 ```bash
-git clone https://github.com/ISBT8/nl2sql-agent.git
+git clone https://github.com/Xiaoyan6554/nl2sql-agent.git
 cd nl2sql-agent
 uv sync --locked
 cp .env.example .env
