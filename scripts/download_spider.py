@@ -10,7 +10,7 @@ import stat
 import tempfile
 import urllib.request
 import zipfile
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -90,7 +90,7 @@ def main() -> int:
         manifest = {
             "source": OFFICIAL_PAGE,
             "download_url": DOWNLOAD_URL,
-            "downloaded_at": datetime.now(timezone.utc).isoformat(),
+            "downloaded_at": datetime.now(UTC).isoformat(),
             "archive_sha256": digest,
             "license": "CC BY-SA 4.0",
         }
